@@ -50,18 +50,20 @@ class SocialAuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-//        dd($user);
-        $authUser = User::where('provider_id', $user->id)->first();
+        $authUser = User::where('provider_id', $user->id)->orWhere('email',$user->email)->first();
+//        $authUser = User::where('provider_id', $user->id)->first();
         if ($authUser) {
             return $authUser;
+        }else{
+            return User::create([
+                'name'     => $user->name,
+                'email'    => $user->email,
+                'provider' => $provider,
+                'provider_id' => $user->id,
+                'avatar' =>$user->avatar,
+                'password'=>bcrypt("thego123")
+            ]);
         }
-        return User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id,
-            'avatar' =>$user->avatar,
-            'password'=>bcrypt("thego123")
-        ]);
+
     }
 }

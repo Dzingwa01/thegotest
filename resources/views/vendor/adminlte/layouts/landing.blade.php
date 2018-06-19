@@ -28,8 +28,8 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <!-- Custom styles for this template -->
     <link href="{{ asset('/css/all-landing.css') }}" rel="stylesheet">
 
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -71,7 +71,38 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
 <div class="container" style="margin-top:8em;">
     <div class="row">
-        <h1>Welcome to The Go</h1>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/business_directory.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/restaurants.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/meal_special.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/transportation.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/routes.jpg')}}" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/upcoming_events.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/calendar.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/news.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/travel.jpg')}}" />
+        </div>
+        <div class="col-md-2">
+            <img src="{{URL::asset('/img/weather.jpg')}}" />
+        </div>
     </div>
 </div>
 

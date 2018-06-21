@@ -30,7 +30,14 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+</style>
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#navigation">
@@ -50,14 +57,15 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#home" class="smoothScroll">{{ trans('adminlte_lang::message.home') }}</a></li>
-                    <li><a href="#" class="smoothScroll">Businesses</a></li>
-                    <li><a href="#" class="smoothScroll">Events</a></li>
-                    <li><a href="#" class="smoothScroll">Restaurants</a></li>
-                    <li><a href="#" class="smoothScroll">News</a></li>
-                    <li><a href="#" class="smoothScroll">Weather</a></li>
-                    <li><a href="#" class="smoothScroll">Travel</a></li>
+                    <li><a href="#" class="smoothScroll">About Us</a></li>
+                    <li><a href="#" class="smoothScroll">Contact Us</a></li>
+                    {{--<li><a href="#" class="smoothScroll">Restaurants</a></li>--}}
+                    {{--<li><a href="#" class="smoothScroll">News</a></li>--}}
+                    {{--<li><a href="#" class="smoothScroll">Weather</a></li>--}}
+                    {{--<li><a href="#" class="smoothScroll">Travel</a></li>--}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
                     @if (Auth::guest())
                         {{--<li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>--}}
                         <li><a href="{{ url('/register') }}">Register Business</a></li>
@@ -70,38 +78,38 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     </div>
 
 <div class="container" style="margin-top:8em;">
-    <div class="row">
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/business_directory.jpg')}}" />
+    <div class="row" style="margin-top:1em;">
+        <div class="col-md-2 col-sm-12 ">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/business_directory.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/restaurants.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/restaurants.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/meal_special.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/meal_special.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/transportation.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/transportation.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/routes.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/routes.jpg')}}" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/upcoming_events.jpg')}}" />
+    <div class="row" style="margin-top:3em;margin-bottom: 3em;">
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/upcoming_events.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/calendar.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/calendar.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/news.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/news.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/travel.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/travel.jpg')}}" />
         </div>
-        <div class="col-md-2">
-            <img src="{{URL::asset('/img/weather.jpg')}}" />
+        <div class="col-md-2 col-sm-12">
+            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/weather.jpg')}}" />
         </div>
     </div>
 </div>

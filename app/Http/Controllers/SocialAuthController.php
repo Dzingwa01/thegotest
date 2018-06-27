@@ -10,7 +10,7 @@ use Socialite;
 
 class SocialAuthController extends Controller
 {
-    protected $redirectTo = '/home_guest';
+    protected $redirectTo = '/home';
     use AuthenticatesUsers;
     //
     /**
@@ -36,8 +36,9 @@ class SocialAuthController extends Controller
         $user = Socialite::driver($provider)->stateless()->user();
 
         $user = $this->findOrCreateUser($user, $provider);
-        auth()->login($user);
-//        dd($status);
+//        dd($user);
+        Auth::login($user);
+
         return redirect($this->redirectTo);
     }
 

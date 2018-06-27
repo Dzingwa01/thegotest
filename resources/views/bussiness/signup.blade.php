@@ -30,14 +30,14 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-<style>
-    .center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
-</style>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#navigation">
@@ -64,55 +64,52 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                     {{--<li><a href="#" class="smoothScroll">Weather</a></li>--}}
                     {{--<li><a href="#" class="smoothScroll">Travel</a></li>--}}
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                {{--<ul class="nav navbar-nav navbar-right">--}}
 
-                    @if (Auth::guest())
+                    {{--@if (Auth::guest())--}}
                         {{--<li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>--}}
-                        <li><a href="{{ url('/business_register') }}">Register Business</a></li>
-                    @else
-                        <li><a href="/home">{{ Auth::user()->name }}</a></li>
-                    @endif
-                </ul>
+                        {{--<li><a href="{{ url('/business_register') }}">Register Business</a></li>--}}
+                    {{--@else--}}
+                        {{--<li><a href="/home">{{ Auth::user()->name }}</a></li>--}}
+                    {{--@endif--}}
+                {{--</ul>--}}
             </div><!--/.nav-collapse -->
         </div>
     </div>
 
-<div class="container" style="margin-top:8em;">
-    <div class="row" style="margin-top:1em;">
-        <div class="col-md-2 col-sm-12 ">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/business_directory.jpg')}}" />
+    <div class="container" style="margin-top:8em;margin-bottom: 3em;">
+    <form>
+        <fieldset><legend>Bussiness Registration Details</legend>
+            <div class="form-group">
+                <label for="business_name">Business Name</label>
+                <input type="text" class="form-control" id="business_name" placeholder="Enter business name">
+            </div>
+            <div class="form-group">
+                <label for="business_type">Business Type</label>
+                <select id="business_type" name="business_type" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label for="contact_name">Contact Person</label>
+                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter contact person">
+            </div>
+        <div class="form-group">
+            <label for="business_email">Email address</label>
+            <input type="email" class="form-control" id="business_email" name="business_email" aria-describedby="emailHelp" placeholder="Enter business email address">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/restaurants.jpg')}}" />
+        <div class="form-group">
+            <label for="business_contact_number">Contact Number</label>
+            <input type="tel" class="form-control" name="business_contact_number" id="business_contact_number" placeholder="Contact Number">
         </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/meal_special.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/transportation.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/routes.jpg')}}" />
-        </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Business Address</label>
+                <textarea type="text" class="form-control" name="business_address" id="contact_number" placeholder="Business address" rows="5"></textarea>
+            </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        </fieldset>
+    </form>
     </div>
-    <div class="row" style="margin-top:3em;margin-bottom: 3em;">
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/upcoming_events.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/calendar.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/news.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/travel.jpg')}}" />
-        </div>
-        <div class="col-md-2 col-sm-12">
-            <img style="margin-top:2em;" class="center" src="{{URL::asset('/img/weather.jpg')}}" />
-        </div>
-    </div>
-</div>
 
     <section id="contact" name="contact"></section>
     <div id="footerwrap">
@@ -120,7 +117,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <div class="col-lg-5">
                 <h3>{{ trans('adminlte_lang::message.address') }}</h3>
                 <p>
-                   Kragga kama,<br/>
+                    Kragga kama,<br/>
                     6001<br/>
                     Port Elizabeth
                 </p>
@@ -161,12 +158,20 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script src="{{ asset('/js/app.js') }}"></script>
 <script src="{{ asset('/js/smoothscroll.js') }}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-    $('.carousel').carousel({
-        interval: 3500
-    })
+    $(document).ready(function() {
+        $('select').select2({placeholder:"Select business type"});
+        $('.carousel').carousel({
+            interval: 3500
+        })
+    });
+
 </script>
+
 </body>
 </html>

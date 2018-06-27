@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class HomeController
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -33,11 +34,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        $user = Auth::user();
+        if($user->hasRole('super_admin')){
+            return view('adminlte::home');
+        }else{
+            return view('welcome');
+        }
+
+    }
+
+    public function businessSignUp(){
+        return view('bussiness.signup');
     }
 
     public function homeGuest()
     {
-        return view('welcome');
+
     }
 }

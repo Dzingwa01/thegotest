@@ -33,27 +33,30 @@ desired effect
 <div id="app">
     <div class="wrapper">
 
-    @include('adminlte::layouts.partials.mainheader')
+        @include('adminlte::layouts.partials.mainheader')
 
-    @include('adminlte::layouts.partials.sidebar')
-
+        @role('super_admin')
+        @include('adminlte::layouts.partials.sidebar')
+        @endrole
+        @role('guest_user')
+        @include('adminlte::layouts.partials.guest_sidebar')
+        @endrole
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+        <div class="content-wrapper">
 
         {{--@include('adminlte::layouts.partials.contentheader')--}}
 
         <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('main-content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+            <section class="content">
+                <!-- Your Page Content Here -->
+                @yield('main-content')
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
 
-    @include('adminlte::layouts.partials.controlsidebar')
+        @include('adminlte::layouts.partials.controlsidebar')
+        @include('adminlte::layouts.partials.footer')
 
-    @include('adminlte::layouts.partials.footer')
-
-</div><!-- ./wrapper -->
+    </div><!-- ./wrapper -->
 </div>
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')

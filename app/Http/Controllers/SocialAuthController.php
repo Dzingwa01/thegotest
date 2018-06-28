@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,7 @@ class SocialAuthController extends Controller
         if ($authUser) {
             return $authUser;
         }else{
-            return User::create([
+            $user = User::create([
                 'name'     => $user->name,
                 'email'    => $user->email,
                 'provider' => $provider,
@@ -64,6 +65,9 @@ class SocialAuthController extends Controller
                 'avatar' =>$user->avatar,
                 'password'=>bcrypt("thego123")
             ]);
+            $role = Role::where('name','guest_user')->first();
+            $user->attachRole($role);
+            return $user;
         }
 
     }

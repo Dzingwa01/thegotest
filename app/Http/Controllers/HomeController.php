@@ -38,9 +38,8 @@ class HomeController extends Controller
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
         }else{
-            return view('welcome');
+            return view('adminlte::guest_home');
         }
-
     }
 
     public function businessSignUp(){

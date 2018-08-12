@@ -38,7 +38,7 @@ class HomeController extends Controller
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
         }else{
-            return view('adminlte::guest_home');
+            return view('adminlte::guest_home',compact('user'));
         }
     }
 

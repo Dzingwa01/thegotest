@@ -20,7 +20,7 @@
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-               <li> <a href="{{url('business_register')}}" class="btn btn-success">Register Business</a></li>
+               {{--<li> <a href="{{url('business_register')}}" class="btn btn-success">Register Business</a></li>--}}
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->

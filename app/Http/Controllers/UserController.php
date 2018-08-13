@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\BusinessType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -16,7 +17,23 @@ class UserController extends Controller
 
         return view('users.index');
     }
+public function bussinessTypesIndex(){
+        return view('bussiness.business_types');
+}
+    public function templateSelection(Request $request){
+        return view('bussiness.template_selection');
+    }
+    function showBusinessTypes(){
+        $types = BusinessType::all();
 
+        return Datatables::of($types)->addColumn('action', function ($type) {
+            $re = 'biz_type/' . $type->id;
+            $sh = 'biz_type/show/' . $type->id;
+            $del = 'biz_type/delete/' . $type->id;
+            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a>';
+        })
+            ->make(true);
+    }
     /**
      * Process datatables ajax request.
      *

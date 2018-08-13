@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.user_layout')
 
 @section('content')
-    <div class="slider">
+    <div class="slider" style="margin-top:1em;">
         <ul class="slides">
             <li>
                 <img src="{{URL::asset('/img/news1.jpg')}}" alt="News Article"> <!-- random image -->

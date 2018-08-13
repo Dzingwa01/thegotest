@@ -15,6 +15,10 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');
+
+Route::get('biz_types_index','UserController@bussinessTypesIndex');
+Route::post('template_selection','UserController@templateSelection');
 Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -24,6 +28,11 @@ Route::get('show','UserController@showUsers')->name('users_info');
 Route::get('users','UserController@getIndex')->name('users');
 Route::post('users','UserController@store')->name('users.store');
 Route::get('create_user','UserController@create');
+Route::get('biz_type/{id}','UserController@editBussinessType');
+Route::get('biz_type/show/{id}','UserController@showBussinessType');
+Route::get('biz_type/delete/{id}','UserController@destroyBussinessType');
+
+Route::get('bussiness_types','UserController@showBusinessTypes')->name('bussiness_types');
 Route::group(['middleware' => 'auth'], function () {
         Route::get('/link1', function ()    {
         // Uses Auth Middleware

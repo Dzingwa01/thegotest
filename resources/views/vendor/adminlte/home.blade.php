@@ -1,9 +1,5 @@
 @extends('adminlte::layouts.app')
 
-@section('htmlheader_title')
-	{{ trans('adminlte_lang::message.home') }}
-@endsection
-
 <?php $users = App\User::all();$businesses = App\Business::all();$businesses_types=App\BusinessType::all();
 ?>
 @section('main-content')

@@ -39,7 +39,7 @@
                 <a href="#"><i class='fa fa-building'></i> <span>Manage Businesses</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">Businesses</a></li>
-                    <li><a href="#">Business Types</a></li>
+                    <li><a href="{{url('biz_types_index')}}">Business Types</a></li>
                 </ul>
             </li>
             <li class=""><a href="#"><i class='fa fa-home'></i> <span>Promotions</span></a></li>

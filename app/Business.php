@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Business extends Model
 {
     //
-    protected $fillable = ["business_name","business_email","business_contact_number","business_address"];
+    protected $fillable = ["business_name","business_email","business_contact_number","business_address","business_type_id"];
 }

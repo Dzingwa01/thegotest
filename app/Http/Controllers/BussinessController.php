@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Package;
+use App\Business;
+use App\BusinessType;
 use Illuminate\Http\Request;
-use App\User;
-use App\Role;
 use DB;
 use Hash;
 use Yajra\DataTables\Facades\DataTables;
 
-class PackageController extends Controller
+class BussinessController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,20 @@ class PackageController extends Controller
     public function index()
     {
         //
-        return view('packages.index');
+        $types= BusinessType::all();
+        return view('bussiness.bussiness_index',compact('types'));
+    }
+
+    public function getBusiness(){
+        $businesses = Business::join('business_types','business_types.id','businesses.business_type_id')->select('businesses.*','business_types.business_type_name')->get();
+//        dd($types);
+        return Datatables::of($businesses)->addColumn('action', function ($business) {
+            $re = 'business/' . $business->id;
+            $sh = 'business/' . $business->id.'/edit';
+            $del = 'business_delete/' . $business->id;
+            return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
+        })
+            ->make(true);
     }
 
     /**
@@ -28,19 +40,6 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function getPackages(){
-        $packages = Package::all();
-//        dd($types);
-        return Datatables::of($packages)->addColumn('action', function ($package) {
-            $re = 'packages/' . $package->id;
-            $sh = 'packages/' . $package->id.'/edit';
-            $del = 'packagesdelete/' . $package->id;
-            return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
-        })
-            ->make(true);
-    }
-
     public function create()
     {
         //
@@ -57,14 +56,13 @@ class PackageController extends Controller
         //
         DB::beginTransaction();
         try{
-            $package = Package::create($request->all());
+            $business = Business::create($request->all());
             DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " saved successfully"]);
+            return redirect('businesses')->with(['status'=>"Business ".$business->name. " saved successfully"]);
         }catch(\Exception $e){
             DB::rollback();
-            return redirect('packages')->with(['error'=>"Error saving package ".$package->name]);
+            return redirect('businesses')->with(['error'=>"Error saving package ".$business->name]);
         }
-
     }
 
     /**
@@ -76,8 +74,7 @@ class PackageController extends Controller
     public function show($id)
     {
         //
-        $package = Package::where('id',$id)->first();
-        return view('packages.view',compact('package'));
+
     }
 
     /**
@@ -89,8 +86,6 @@ class PackageController extends Controller
     public function edit($id)
     {
         //
-        $package = Package::where('id',$id)->first();
-        return view('packages.edit',compact('package'));
     }
 
     /**
@@ -100,18 +95,9 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Package $package)
+    public function update(Request $request, $id)
     {
         //
-        DB::beginTransaction();
-        try{
-            $package->update($request->all());
-            DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " updated successfully"]);
-        }catch(\Exception $e){
-            DB::rollback();
-            return redirect('packages')->with(['error'=>"Error updating package ".$package->name]);
-        }
     }
 
     /**
@@ -125,13 +111,13 @@ class PackageController extends Controller
         //
         DB::beginTransaction();
         try{
-            $package = Package::where('id',$id)->first();
-            $package->delete();
+            $business = Business::where('id',$id)->first();
+            $business->delete();
             DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " deleted successfully"]);
+            return redirect('businesses')->with(['status'=>"Business ".$business->name. " deleted successfully"]);
         }catch(\Exception $e){
             DB::rollback();
-            return redirect('packages')->with(['error'=>"Error deleting package ".$package->name]);
+            return redirect('businesses')->with(['error'=>"Error deleting business ".$business->name]);
         }
     }
 }

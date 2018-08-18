@@ -28,4 +28,126 @@
             </li>
         </ul>
     </div>
+    <div class="container" style="margin-top:1em;">
+        <div class="row" style="margin-top:1em;">
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/business_directory.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin-top:2em;margin:auto;" class="center" src="{{URL::asset('/img/restaurants.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin-top:2em;margin:auto;" class="center" src="{{URL::asset('/img/transportation.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/routes.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" style="margin-top:1em;">
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/upcoming_events.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/news.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/travel.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin:auto;" class="center" src="{{URL::asset('/img/weather.jpg')}}" />
+                        {{--<span class="card-title">Card Title</span>--}}
+                    </div>
+                    {{--<div class="card-content">--}}
+                        {{--<p>PE Business Directory.</p>--}}
+                    {{--</div>--}}
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 @endsection

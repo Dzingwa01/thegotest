@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BusinessType;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,9 @@ class HomeController extends Controller
     }
 
     public function businessSignUp(){
-        return view('bussiness.signup');
+
+        $types =  BusinessType::all();
+        return view('bussiness.signup',compact('types'));
     }
 
     public function homeGuest()

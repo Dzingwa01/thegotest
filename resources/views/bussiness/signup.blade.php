@@ -16,7 +16,11 @@
                     </div>
                     <div class="input-field col m6 s12">
 
-                        <select id="business_type" name="business_type" ></select>
+                        <select id="business_type" name="business_type" >
+                            @foreach($types as $type)
+                                <option value="{{$type->id}}">{{$type->business_type_name}}</option>
+                            @endforeach
+                        </select>
                         <label for="business_type">Business Type</label>
                     </div>
                 </div>

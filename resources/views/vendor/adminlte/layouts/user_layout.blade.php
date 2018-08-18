@@ -94,9 +94,10 @@
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text">About Us</h5>
-                <p class="grey-text text-lighten-4">The Go - Simply One Click Away, tailored to make your way around Port Elizabeth a
-                    pleasant experience. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum egestas imperdiet. Nullam convallis erat a lorem feugiat, vitae consequat nunc laoreet. Donec non leo dignissim, varius nisl vitae, porttitor elit. Nulla feugiat suscipit risus et tristique. Praesent placerat malesuada ullamcorper. Fusce congue arcu sit amet sapien suscipit tristique.
-                    Integer quis ante quam. In sem augue, dictum nec lacinia non, dictum at ex.  </p>
+                <p class="grey-text text-lighten-4">The Go simply 1 click away. We believe there is a better way to do marketing.
+                    A more viable way where customers are EARNED rather than bought. We're obsessively passionate about it, and our
+                    mission is to help company's achieve it !
+                    We're excited to simplify great marketing and advertising giving a platform where everyone is equally exposed </p>
 
 
             </div>

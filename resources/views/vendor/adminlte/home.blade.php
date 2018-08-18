@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 
-<?php $users = App\User::all();$businesses = App\Business::all();$businesses_types=App\BusinessType::all();
+<?php $users = App\User::all();$businesses = App\Business::all();$businesses_types=App\BusinessType::all();$packages=App\Package::all();
 ?>
 @section('main-content')
 	<div class="container-fluid spark-screen">
@@ -57,6 +57,26 @@
 											<div class="progress-bar" style="width:100%"></div>
 										</div>
 										<span class="progress-description">Total Number Business Types</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 well-lg">
+						<div class="box">
+							<div class="box-header with-border">
+								{{--<h3>Users Report</h3>--}}
+								<div class="info-box bg-gray">
+									<span class="info-box-icon"><i class="io ion-ios-briefcase"></i> </span>
+									<div class="info-box-content">
+										<span class="info-box-text">Business Packages</span>
+										<span class="info-box-number">{{count($packages)}}</span>
+										<div class="progress">
+											<div class="progress-bar" style="width:100%"></div>
+										</div>
+										<span class="progress-description">Total Number of Packages</span>
 									</div>
 								</div>
 							</div>

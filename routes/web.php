@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');
 
+Route::resource('businesses', 'BussinessController');
+Route::get('get_businesses','BussinessController@getBusiness')->name('get_businesses');
+Route::get('business_delete/{id}','BussinessController@destroy');
+Route::post('business/update/{package}','BussinessController@update');
+
 Route::resource('packages', 'PackageController');
 Route::get('get_packages','PackageController@getPackages')->name('get_packages');
 Route::get('packages_delete/{id}','PackageController@destroy');

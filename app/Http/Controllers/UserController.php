@@ -24,13 +24,14 @@ public function bussinessTypesIndex(){
         return view('bussiness.template_selection');
     }
     function showBusinessTypes(){
-        $types = BusinessType::all();
 
+        $types = BusinessType::all();
+//        dd($types);
         return Datatables::of($types)->addColumn('action', function ($type) {
             $re = 'biz_type/' . $type->id;
             $sh = 'biz_type/show/' . $type->id;
             $del = 'biz_type/delete/' . $type->id;
-            return '<a href=' . $sh . '><i class="glyphicon glyphicon-eye-open"></i></a> <a href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a>';
+            return '<a class="btn btn-primary" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
         })
             ->make(true);
     }
@@ -50,11 +51,59 @@ public function bussinessTypesIndex(){
                 $re='users/'.$user->id;
                 $sh='users/show/'.$user->id;
                 $del='users/delete/'.$user->id;
-                return '<a href='.$sh.'><i class="glyphicon glyphicon-eye-open"></i></a> <a href='.$re.'><i class="glyphicon glyphicon-edit"></i></a> <a href='.$del.'><i class="glyphicon glyphicon-trash"></i></a>';
+                return '<a class="btn btn-primary" href='.$sh.' style="margin:0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" style="margin:0.4em;" href='.$re.'><i class="glyphicon glyphicon-edit"></i></a> <a class="btn btn-danger" style="margin:0.4em;" href='.$del.'><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }
 
+    public function addBussinessType(Request $request){
+//        dd(BusinessType::all());
+//        dd($request->all());
+        DB::beginTransaction();
+        try{
+            $type = BusinessType::create($request->all());
+            DB::commit();
+            return redirect('biz_types_index')->with(['status'=>"Business type ".$type->name. " saved successfully"]);
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect('biz_types_index')->with(['error'=>"An error occured please contact admin."]);
+        }
+    }
+
+    public function editBussinessType(BusinessType $type){
+       return view('bussiness.edit_business',compact('type'));
+    }
+
+    public function showBussinessType(BusinessType $type){
+        return view('bussiness.type_details',compact('type'));
+    }
+
+    public function updateBussinessType(Request $request, BusinessType $type){
+        DB::beginTransaction();
+        try{
+            $type->update($request->all());
+            DB::commit();
+            return redirect('biz_types_index')->with(['status'=>"Business type ".$type->name. " updated successfully"]);
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect('biz_types_index')->with(['error'=>"Business type ".$type->name. " could not be updated. Please contact Admin."]);
+        }
+    }
+
+    function destroyBussinessType(BusinessType $type){
+//        dd($type);
+        $temp_var = $type;
+        DB::beginTransaction();
+        try{
+            $type->delete();
+            DB::commit();
+            return redirect('biz_types_index')->with(['status'=>"Business type ".$temp_var->business_type_name. " deleted successfully"]);
+        }catch (\Exception $e){
+            DB::rollback();
+            return redirect('biz_types_index')->with(['error'=>"Business type ".$temp_var->business_type_name. " could not be deleted. Contact admin"]);
+        }
+
+    }
     public function editUser($id){
         $user=User::find($id);
         $users_roles=DB::table('roles')->get();

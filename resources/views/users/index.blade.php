@@ -6,11 +6,11 @@
 @section('main-content')
 	<div class="container-fluid box box-success">
 		<div class="row">
-		<div class="col m3" style="margin-top:1em;margin-bottom: 2em;">
+		<div class="col m3" style="margin-top:1em;margin-bottom: 2em;margin-left: 1em;">
 			<a href="{{url('create_user')}}" class="btn btn-success"><i class="fa fa-user"></i>Add User</a></li>
 		</div>
 		<div class="col m12">
-			<table class="table table-bordered" id="users-table">
+			<table class="table table-bordered display responsive" id="users-table" style="width:100%">
 				<thead>
 					<tr>
 						<th>Name</th>

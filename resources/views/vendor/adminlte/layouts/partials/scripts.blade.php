@@ -13,3 +13,4 @@
         'csrfToken' => csrf_token(),
     ]) !!};
 </script>
+@stack('custom-scripts')

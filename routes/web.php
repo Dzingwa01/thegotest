@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');
 
+Route::resource('packages', 'PackageController');
+Route::get('get_packages','PackageController@getPackages')->name('get_packages');
+Route::get('packages_delete/{id}','PackageController@destroy');
+Route::post('packages/update/{package}','PackageController@update');
+
 Route::get('biz_types_index','UserController@bussinessTypesIndex');
 Route::post('template_selection','UserController@templateSelection');
 Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider');
@@ -28,9 +33,10 @@ Route::get('show','UserController@showUsers')->name('users_info');
 Route::get('users','UserController@getIndex')->name('users');
 Route::post('users','UserController@store')->name('users.store');
 Route::get('create_user','UserController@create');
-Route::get('biz_type/{id}','UserController@editBussinessType');
-Route::get('biz_type/show/{id}','UserController@showBussinessType');
-Route::get('biz_type/delete/{id}','UserController@destroyBussinessType');
+Route::get('biz_type/{type}','UserController@editBussinessType');
+Route::get('biz_type/show/{type}','UserController@showBussinessType');
+Route::get('biz_type/delete/{type}','UserController@destroyBussinessType');
+Route::post('/update_bussiness_type/{type}','UserController@updateBussinessType');
 
 Route::get('bussiness_types','UserController@showBusinessTypes')->name('bussiness_types');
 Route::group(['middleware' => 'auth'], function () {

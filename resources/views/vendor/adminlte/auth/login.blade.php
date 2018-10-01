@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <div class="login-box-body">
+        <div class="login-box-body" style="border-radius: 15px;">
         <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
         <form action="{{ url('/login') }}" method="post">
 

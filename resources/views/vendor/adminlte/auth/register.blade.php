@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <div class="register-box-body">
+            <div class="register-box-body" style="border-radius: 15px">
                 <p class="login-box-msg">{{ trans('adminlte_lang::message.registermember') }}</p>
                 <form action="{{ url('/register') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -35,6 +35,10 @@
                     <div class="form-group has-feedback">
                         <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email" value="{{ old('email') }}"/>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="contact_number" class="form-control" placeholder="Contact Number" name="contact_number" value="{{ old('contact_number') }}"/>
+                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
                         <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>

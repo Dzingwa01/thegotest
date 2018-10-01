@@ -104,17 +104,16 @@
             <div class="col l3 s12">
                 <h5 class="white-text">Services</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Maecenas vestibulum, metus non lobortis port</a></li>
-                    <li><a class="white-text" href="#!">Praesent dignissim iaculis urna</a></li>
-                    <li><a class="white-text" href="#!">Nullam imperdiet massa nisi</a></li>
+                    <li><a class="white-text" href="#!">Excellent marketting platform for your business</a></li>
+
                 </ul>
             </div>
             <div class="col l3 s12">
                 <h5 class="white-text">Connect</h5>
                 <ul>
-                    <li><a class="white-text" href="#contact_us"><i class="material-icons">email</i> marketting@thego.co.za</a></li>
+                    <li><a class="white-text" href="#contact_us"><i class="material-icons">email</i> marketting@thego.net.za</a></li>
                     <li><a class="white-text" href="#!"><i class="material-icons">local_phone</i>077 244 5564</a></li>
-                    <li><a class="white-text" href="#!">Facebook</a></li>
+                    <li><a class="white-text" href="#!"><i class="material-icons">web</i>Facebook</a></li>
                 </ul>
             </div>
         </div>

@@ -23,6 +23,11 @@ public function bussinessTypesIndex(){
     public function templateSelection(Request $request){
         return view('bussiness.template_selection');
     }
+
+    public function templatePreview(Request $request){
+        return view('bussiness.template_preview');
+    }
+
     function showBusinessTypes(){
 
         $types = BusinessType::all();

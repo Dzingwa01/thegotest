@@ -29,6 +29,7 @@ Route::post('packages/update/{package}','PackageController@update');
 
 Route::get('biz_types_index','UserController@bussinessTypesIndex');
 Route::post('template_selection','UserController@templateSelection');
+Route::post('template_preview','UserController@templatePreview');
 Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
 Route::get('/home', 'HomeController@index')->name('home');

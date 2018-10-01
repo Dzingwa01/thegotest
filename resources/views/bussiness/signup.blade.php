@@ -3,7 +3,7 @@
 @section('content')
     <div class="container" style="margin-top:3em;">
         <div id="normal_tracker" class="row">
-            <div id="normal_tracker" class="step-container" style="width: 300px; margin: 0 auto"></div>
+            <div id="normal_tracker" class="step-container" style="width: 500px; margin: 0 auto"></div>
         </div>
         <h6 class="text-center text-capitalize" style="margin-top:0.5em;">Complete registration form below</h6>
         <div class="row">
@@ -75,7 +75,7 @@
     <script>
         $(document).ready(function(){
             $('.step-container').stepMaker({
-                steps: ['Business Signup', 'Info Template', 'Complete Setup'],
+                steps: ['Business Signup', 'Business Template Info', 'Template Preview'],
                 currentStep: 1
             });
         });

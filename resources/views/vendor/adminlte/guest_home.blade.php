@@ -39,9 +39,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -53,9 +53,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -67,9 +67,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -81,9 +81,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 
@@ -99,9 +99,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -113,9 +113,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -127,9 +127,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="col s12 m3">
@@ -141,9 +141,9 @@
                     {{--<div class="card-content">--}}
                         {{--<p>PE Business Directory.</p>--}}
                     {{--</div>--}}
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+                    {{--<div class="card-action">--}}
+                        {{--<a href="#">This is a link</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 

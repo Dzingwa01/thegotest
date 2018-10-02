@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="business_name">Business Name</label>
-                        <input type="text" class="validate" id="business_name" >
+                        <input type="text" class="validate" id="business_name" name="business_name" >
                     </div>
+                    <input id="contact_person_id" name="contact_person_id" value="{{$user->id}}" hidden>
                     <div class="input-field col m6 s12">
-
-                        <select id="business_type" name="business_type" >
+                        <select id="business_type_id" name="business_type_id" >
                             @foreach($types as $type)
                                 <option value="{{$type->id}}">{{$type->business_type_name}}</option>
                             @endforeach
@@ -27,17 +27,17 @@
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="contact_name">Contact Person</label>
-                        <input type="text" class="validate" id="contact_name" name="contact_name" >
+                        <input type="text" class="validate" id="contact_name" name="contact_name" value="{{$user->name. ' ' .$user->surname}}" >
                     </div>
                     <div class="input-field col m6 s12">
-                        <input type="email" class="validate" id="business_email" name="business_email"  >
+                        <input type="email" class="validate" id="business_email" name="business_email" value="{{$user->email}}" >
                         <label for="business_email">Email address</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="business_contact_number">Contact Number</label>
-                        <input type="tel" class="validate" name="business_contact_number" id="business_contact_number" >
+                        <input type="tel" class="validate" name="business_contact_number" id="business_contact_number" value="{{$user->contact_number}}" >
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +48,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="col offset-s4">
+                    <div class="col offset-s5">
                         <button type="submit" class="btn btn-success">Next <i class="material-icons right">send</i></button>
                     </div>
                 </div>

@@ -89,7 +89,7 @@
 </div>
 
 
-<footer class="page-footer teal container-fluid">
+<footer class="page-footer container-fluid" style="background-color: black;opacity: 0.8;">
     <div class="container-fluid">
         <div class="row">
             <div class="col l6 s12">

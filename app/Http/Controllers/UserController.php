@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Business;
 use App\BusinessType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,19 @@ public function bussinessTypesIndex(){
         return view('bussiness.business_types');
 }
     public function templateSelection(Request $request){
-        return view('bussiness.template_selection');
+//        dd($request->all());
+        DB::beginTransaction();
+        try{
+            
+            $business = Business::create($request->all());
+//            dd($business);
+            return view('bussiness.template_selection',compact('business'));
+
+        }catch(\Exception $e){
+            dd($e);
+        }
+
+
     }
 
     public function templatePreview(Request $request){

@@ -44,9 +44,10 @@ class HomeController extends Controller
     }
 
     public function businessSignUp(){
-
+        $user = Auth::user();
+//        dd($user);
         $types =  BusinessType::all();
-        return view('bussiness.signup',compact('types'));
+        return view('bussiness.signup',compact('types','user'));
     }
 
     public function homeGuest()

@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12 m6">
-                        <img id="item_image" src="" class="img-responsive"/>   <br>
+                        <img id="item_image" src="" class="img-responsive" width="250px; height:250px"/>   <br>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>Upload Logo</span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="row">
                     <div id="banner_row" class="col s12 m6" hidden>
-                        <img id="banner_image" src="" class="img-responsive"/>   <br>
+                        <img id="banner_image" src="" class="img-responsive" width="720" height="500"/>   <br>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>Upload Banner</span>
@@ -69,8 +69,11 @@
                 </div>
 
                 <div class="row">
-                    <div class="col offset-s4">
-                        <button type="submit" class="btn btn-success">Next <i class="material-icons right">send</i></button>
+                    <div class="col offset-s1">
+                        <button id="back" class="btn btn-success">Back <i class="material-icons left">arrow_back</i></button>
+                    </div>
+                    <div class="col offset-s2">
+                        <button type="submit" id="save" class="btn btn-success">Next <i class="material-icons right">send</i></button>
                     </div>
                 </div>
             </form>
@@ -102,6 +105,12 @@
                 }else{
                     $("#banner_row").hide();
                 }
+            });
+
+            $("#back").on('click',function(e){
+//                alert("Button clicked");
+                e.preventDefault();
+               window.location.href = "/business_register";
             });
         });
         function preview_file(){

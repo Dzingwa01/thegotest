@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="business_name">Business Name</label>
-                        <input type="text" class="validate" id="business_name" name="business_name" >
+                        <input type="text" class="validate" id="business_name" name="business_name" required >
                     </div>
                     <input id="contact_person_id" name="contact_person_id" value="{{$user->id}}" hidden>
                     <div class="input-field col m6 s12">
-                        <select id="business_type_id" name="business_type_id" >
+                        <select id="business_type_id" name="business_type_id" required>
                             @foreach($types as $type)
                                 <option value="{{$type->id}}">{{$type->business_type_name}}</option>
                             @endforeach
@@ -27,23 +27,23 @@
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="contact_name">Contact Person</label>
-                        <input type="text" class="validate" id="contact_name" name="contact_name" value="{{$user->name. ' ' .$user->surname}}" >
+                        <input type="text" class="validate" id="contact_name" name="contact_name" value="{{$user->name. ' ' .$user->surname}}" required>
                     </div>
                     <div class="input-field col m6 s12">
-                        <input type="email" class="validate" id="business_email" name="business_email" value="{{$user->email}}" >
+                        <input type="email" class="validate" id="business_email" name="business_email" value="{{$user->email}}" required>
                         <label for="business_email">Email address</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="business_contact_number">Contact Number</label>
-                        <input type="tel" class="validate" name="business_contact_number" id="business_contact_number" value="{{$user->contact_number}}" >
+                        <input type="tel" class="validate" name="business_contact_number" id="business_contact_number" value="{{$user->contact_number}}" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <label for="business_address">Business Address</label>
-                        <textarea type="text" class="materialize-textarea" name="business_address" id="business_address" ></textarea>
+                        <textarea type="text" class="materialize-textarea" name="business_address" id="business_address" required ></textarea>
                     </div>
 
                 </div>
@@ -75,7 +75,7 @@
     <script>
         $(document).ready(function(){
             $('.step-container').stepMaker({
-                steps: ['Business Signup', 'Business Template Info', 'Template Preview'],
+                steps: ['Business Signup', 'Business Template Info', 'Packages & Contract'],
                 currentStep: 1
             });
         });

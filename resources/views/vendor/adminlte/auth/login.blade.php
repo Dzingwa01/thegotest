@@ -9,7 +9,7 @@
     <div id="app">
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><img src="{{URL::asset('/img/the_go_logo.png')}}" /></a>
+                <a href="{{ url('/') }}"><img src="{{URL::asset('/img/the_go_logo.png')}}" /></a>
             </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)

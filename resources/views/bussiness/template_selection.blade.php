@@ -91,7 +91,7 @@
 
         $(document).ready(function(){
             $('.step-container').stepMaker({
-                steps: ['Business Signup', 'Business Template Info', 'Template Preview'],
+                steps: ['Business Signup', 'Business Template Info', 'Packages & Contract'],
                 currentStep: 2
             });
             $("#item_image").hide();

@@ -35,7 +35,7 @@ class PackageController extends Controller
         return Datatables::of($packages)->addColumn('action', function ($package) {
             $re = 'packages/' . $package->id;
             $sh = 'packages/' . $package->id.'/edit';
-            $del = 'packagesdelete/' . $package->id;
+            $del = 'packages/delete/' . $package->id;
             return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
         })
             ->make(true);

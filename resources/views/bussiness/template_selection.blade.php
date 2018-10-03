@@ -7,7 +7,7 @@
         </div>
         <h6 class="text-center text-capitalize" style="margin-top:0.5em;">Complete the template below</h6>
         <div class="row">
-            <form class="col s12 card" method="post" action="{{url('template_preview')}}" >
+            <form class="col s12 card" method="post" action="{{url('packages-contracts')}}" >
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="input-field col m6 s12">
@@ -91,7 +91,7 @@
 
         $(document).ready(function(){
             $('.step-container').stepMaker({
-                steps: ['Business Signup', 'Business Template Info', 'Template Preview'],
+                steps: ['Business Signup', 'Template Info', 'Packages&Contracts','Finish'],
                 currentStep: 2
             });
             $("#item_image").hide();

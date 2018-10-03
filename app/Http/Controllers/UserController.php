@@ -22,19 +22,14 @@ public function bussinessTypesIndex(){
         return view('bussiness.business_types');
 }
     public function templateSelection(Request $request){
-//        dd($request->all());
         DB::beginTransaction();
         try{
-            
             $business = Business::create($request->all());
-//            dd($business);
             return view('bussiness.template_selection',compact('business'));
 
         }catch(\Exception $e){
             dd($e);
         }
-
-
     }
 
     public function templatePreview(Request $request){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business;
 use App\BusinessType;
+use App\Package;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
@@ -75,6 +76,11 @@ class BussinessController extends Controller
     {
         //
 
+    }
+
+    public function packagesContracts(){
+        $packages = Package::all();
+        return view('bussiness.packages_contracts',compact('packages'));
     }
 
     /**

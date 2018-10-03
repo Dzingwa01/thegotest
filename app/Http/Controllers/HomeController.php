@@ -43,6 +43,10 @@ class HomeController extends Controller
         }
     }
 
+    public function getTCS(){
+
+    }
+
     public function businessSignUp(){
         $user = Auth::user();
 //        dd($user);

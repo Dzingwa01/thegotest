@@ -21,15 +21,16 @@ Route::resource('businesses', 'BussinessController');
 Route::get('get_businesses','BussinessController@getBusiness')->name('get_businesses');
 Route::get('business_delete/{id}','BussinessController@destroy');
 Route::post('business/update/{package}','BussinessController@update');
+Route::post('packages-contracts','BussinessController@packagesContracts');
 
 Route::resource('packages', 'PackageController');
 Route::get('get_packages','PackageController@getPackages')->name('get_packages');
-Route::get('packages_delete/{id}','PackageController@destroy');
+Route::get('packages/delete/{id}','PackageController@destroy');
 Route::post('packages/update/{package}','PackageController@update');
 
 Route::get('biz_types_index','UserController@bussinessTypesIndex');
 Route::post('template_selection','UserController@templateSelection');
-Route::post('template_preview','UserController@templatePreview');
+Route::get('business-signup-finish','UserController@templatePreview');
 Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -45,6 +46,7 @@ Route::get('biz_type/delete/{type}','UserController@destroyBussinessType');
 Route::post('/update_bussiness_type/{type}','UserController@updateBussinessType');
 
 Route::get('bussiness_types','UserController@showBusinessTypes')->name('bussiness_types');
+Route::get('the_go_tcs','HomeController@getTCS');
 Route::group(['middleware' => 'auth'], function () {
         Route::get('/link1', function ()    {
         // Uses Auth Middleware

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return view('welcome');
 });
 
 Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');

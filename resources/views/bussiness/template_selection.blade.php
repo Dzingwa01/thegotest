@@ -5,6 +5,7 @@
         <div id="normal_tracker" class="row">
             <div id="normal_tracker" class="step-container" style="width: 500px; margin: 0 auto"></div>
         </div>
+        {{--{{$business}}--}}
         <h6 class="text-center text-capitalize" style="margin-top:0.5em;">Complete the template below</h6>
         <div class="row">
             <form class="col s12 card" method="post" action="{{url('packages-contracts')}}" >

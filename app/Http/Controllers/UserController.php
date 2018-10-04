@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Business;
@@ -9,6 +10,7 @@ use App\User;
 use App\Role;
 use DB;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -18,25 +20,36 @@ class UserController extends Controller
 
         return view('users.index');
     }
-public function bussinessTypesIndex(){
-        return view('bussiness.business_types');
-}
-    public function templateSelection(Request $request){
-        DB::beginTransaction();
-        try{
-            $business = Business::create($request->all());
-            return view('bussiness.template_selection',compact('business'));
 
-        }catch(\Exception $e){
+    public function bussinessTypesIndex()
+    {
+        return view('bussiness.business_types');
+    }
+
+    public function templateSelection(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $business = Business::where('contact_person_id', Auth::user()->id)->first();
+            if (is_null($business)) {
+                $business = Business::create($request->all());
+            }
+
+            DB::commit();
+            return view('bussiness.template_selection', compact('business'));
+
+        } catch (\Exception $e) {
             dd($e);
         }
     }
 
-    public function templatePreview(Request $request){
+    public function templatePreview(Request $request)
+    {
         return view('bussiness.template_preview');
     }
 
-    function showBusinessTypes(){
+    function showBusinessTypes()
+    {
 
         $types = BusinessType::all();
 //        dd($types);
@@ -48,6 +61,7 @@ public function bussinessTypesIndex(){
         })
             ->make(true);
     }
+
     /**
      * Process datatables ajax request.
      *
@@ -55,93 +69,103 @@ public function bussinessTypesIndex(){
      */
     public function showUsers()
     {
-        $users = User::join('role_user','role_user.user_id','users.id')
-            ->join('roles','roles.id','role_user.role_id')
-            ->select(['users.id', 'users.name', 'users.email', 'surname','contact_number' ,'users.created_at', 'users.updated_at','display_name']);
+        $users = User::join('role_user', 'role_user.user_id', 'users.id')
+            ->join('roles', 'roles.id', 'role_user.role_id')
+            ->select(['users.id', 'users.name', 'users.email', 'surname', 'contact_number', 'users.created_at', 'users.updated_at', 'display_name']);
 
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
-                $re='users/'.$user->id;
-                $sh='users/show/'.$user->id;
-                $del='users/delete/'.$user->id;
-                return '<a class="btn btn-primary" href='.$sh.' style="margin:0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" style="margin:0.4em;" href='.$re.'><i class="glyphicon glyphicon-edit"></i></a> <a class="btn btn-danger" style="margin:0.4em;" href='.$del.'><i class="glyphicon glyphicon-trash"></i></a>';
+                $re = 'users/' . $user->id;
+                $sh = 'users/show/' . $user->id;
+                $del = 'users/delete/' . $user->id;
+                return '<a class="btn btn-primary" href=' . $sh . ' style="margin:0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" style="margin:0.4em;" href=' . $re . '><i class="glyphicon glyphicon-edit"></i></a> <a class="btn btn-danger" style="margin:0.4em;" href=' . $del . '><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->make(true);
     }
 
-    public function addBussinessType(Request $request){
+    public function addBussinessType(Request $request)
+    {
 //        dd(BusinessType::all());
 //        dd($request->all());
         DB::beginTransaction();
-        try{
+        try {
             $type = BusinessType::create($request->all());
             DB::commit();
-            return redirect('biz_types_index')->with(['status'=>"Business type ".$type->name. " saved successfully"]);
-        }catch(\Exception $e){
+            return redirect('biz_types_index')->with(['status' => "Business type " . $type->name . " saved successfully"]);
+        } catch (\Exception $e) {
             DB::rollback();
-            return redirect('biz_types_index')->with(['error'=>"An error occured please contact admin."]);
+            return redirect('biz_types_index')->with(['error' => "An error occured please contact admin."]);
         }
     }
 
-    public function editBussinessType(BusinessType $type){
-       return view('bussiness.edit_business',compact('type'));
+    public function editBussinessType(BusinessType $type)
+    {
+        return view('bussiness.edit_business', compact('type'));
     }
 
-    public function showBussinessType(BusinessType $type){
-        return view('bussiness.type_details',compact('type'));
+    public function showBussinessType(BusinessType $type)
+    {
+        return view('bussiness.type_details', compact('type'));
     }
 
-    public function updateBussinessType(Request $request, BusinessType $type){
+    public function updateBussinessType(Request $request, BusinessType $type)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $type->update($request->all());
             DB::commit();
-            return redirect('biz_types_index')->with(['status'=>"Business type ".$type->name. " updated successfully"]);
-        }catch(\Exception $e){
+            return redirect('biz_types_index')->with(['status' => "Business type " . $type->name . " updated successfully"]);
+        } catch (\Exception $e) {
             DB::rollback();
-            return redirect('biz_types_index')->with(['error'=>"Business type ".$type->name. " could not be updated. Please contact Admin."]);
+            return redirect('biz_types_index')->with(['error' => "Business type " . $type->name . " could not be updated. Please contact Admin."]);
         }
     }
 
-    function destroyBussinessType(BusinessType $type){
+    function destroyBussinessType(BusinessType $type)
+    {
 //        dd($type);
         $temp_var = $type;
         DB::beginTransaction();
-        try{
+        try {
             $type->delete();
             DB::commit();
-            return redirect('biz_types_index')->with(['status'=>"Business type ".$temp_var->business_type_name. " deleted successfully"]);
-        }catch (\Exception $e){
+            return redirect('biz_types_index')->with(['status' => "Business type " . $temp_var->business_type_name . " deleted successfully"]);
+        } catch (\Exception $e) {
             DB::rollback();
-            return redirect('biz_types_index')->with(['error'=>"Business type ".$temp_var->business_type_name. " could not be deleted. Contact admin"]);
+            return redirect('biz_types_index')->with(['error' => "Business type " . $temp_var->business_type_name . " could not be deleted. Contact admin"]);
         }
 
     }
-    public function editUser($id){
-        $user=User::find($id);
-        $users_roles=DB::table('roles')->get();
-        $role=DB::table('role_user')->where('user_id',$id)->first();
-        return view('users.edit')->with('user',$user)->with('users_roles',$users_roles)->with('role',$role);
+
+    public function editUser($id)
+    {
+        $user = User::find($id);
+        $users_roles = DB::table('roles')->get();
+        $role = DB::table('role_user')->where('user_id', $id)->first();
+        return view('users.edit')->with('user', $user)->with('users_roles', $users_roles)->with('role', $role);
     }
-    public function update(Request $request,$id)
+
+    public function update(Request $request, $id)
     {
         $input = $request->all();
         $user = User::find($id);
         $user->update($input);
-        DB::table('role_user')->where('user_id',$id)->delete();
+        DB::table('role_user')->where('user_id', $id)->delete();
 
         $user->roles()->attach($input['user_role']);
         return redirect()->route('users');
     }
+
     public function destroy($id)
     {
         User::find($id)->delete();
         return redirect()->route('users');
     }
+
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        return view('users.show', compact('user'));
     }
     // /**
     //  * Display a listing of the resource.
@@ -160,11 +184,11 @@ public function bussinessTypesIndex(){
     //  *
     //  * @return \Illuminate\Http\Response
     //  */
-     public function create()
-     {
-         $roles = Role::pluck('id','display_name');
-         return view('users.create',compact('roles'));
-     }
+    public function create()
+    {
+        $roles = Role::pluck('id', 'display_name');
+        return view('users.create', compact('roles'));
+    }
     //
     // /**
     //  * Store a newly created resource in storage.

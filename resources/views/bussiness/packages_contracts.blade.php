@@ -126,7 +126,7 @@
     <script src="js/materialize.js"></script>
     <script>
         function select_package(obj){
-            console.log("here is the id",obj.id);
+            sessionStorage.setItem("package_id",obj.id);
         }
         $(document).ready(function(){
             $('.step-container').stepMaker({
@@ -135,7 +135,11 @@
             });
             $('.modal').modal();
             $("#agree_btn").on('click',function(){
-               window.location.href = "/business-signup-finish";
+                $.get('/save_package/'+sessionStorage.getItem('package_id'),function(response){
+                    console.log("data",response);
+                    window.location.href = "/business-signup-finish";
+                });
+
             });
         });
 

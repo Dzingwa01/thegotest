@@ -33,6 +33,8 @@ class UserController extends Controller
             $business = Business::where('contact_person_id', Auth::user()->id)->first();
             if (is_null($business)) {
                 $business = Business::create($request->all());
+            }else{
+                $business->update($request->all());
             }
 
             DB::commit();
@@ -45,7 +47,8 @@ class UserController extends Controller
 
     public function templatePreview(Request $request)
     {
-        return view('bussiness.template_preview');
+        $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        return view('bussiness.template_preview',compact('business'));
     }
 
     function showBusinessTypes()

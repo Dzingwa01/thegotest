@@ -8,11 +8,13 @@
         <div class="row">
             <form class="col s12 card" method="post" action="{{url('template_selection')}}" >
                 {{ csrf_field() }}
+                <p>{{$business->business_name}}, thank you for signing up. An email has been sent to {{$business->business_email}} with all
+                the neccessary package and contract information.</p>
                 <div class="row" style="margin-top:2em;margin-left: 2em;">
                     <label>Do you have a referal code?</label>
                     <p >
                         <label>
-                            <input name="referal_code" type="radio" checked value="no"/>
+                            <input name="referal_code" type="radio" value="no"/>
                             <span>No</span>
                         </label>
 
@@ -21,16 +23,21 @@
                             <span>Yes</span>
                         </label>
                     </p>
-                    <div class="input-field col m6 s12">
-                        <label for="business_name">Referal Code</label>
-                        <input type="text" class="validate" id="referal_code" name="referal_code" required >
+                    <div id="referal_div" class="input-field col m6 s12">
+                        <label for="referral_code">Referal Code</label>
+                        <input type="text" class="validate" id="referral_code" name="referal_code"  >
                     </div>
 
                 </div>
-
+                <div id="trial_div" class="row" style="margin-left: 2em;">
+                    <p> Your free trial will expire in 30 days</p>
+                </div>
+                <div id="referal_code_div" style="margin-left: 2em;" class="row">
+                    <p> Your free trial will expire in 45 days</p>
+                </div>
                 <div class="row">
                     <div class="col offset-s5">
-                        <button type="submit" class="btn btn-success">Next <i class="material-icons right">send</i></button>
+                        <button type="submit" class="btn btn-success">Finish <i class="material-icons right">send</i></button>
                     </div>
                 </div>
             </form>
@@ -50,7 +57,22 @@
                 steps: ['Business Signup', 'Template Info', 'Packages&Contracts','Finish'],
                 currentStep: 4
             });
+            $("#referal_div").hide();
+            $("#referal_code_div").hide();
+            $("#trial_div").hide();
 
+            $('input:radio').click(function () {
+                var selected_val = $(this).val();
+                if(selected_val=="yes"){
+                    $("#referal_div").show();
+                    $("#referal_code_div").show();
+                    $("#trial_div").hide();
+                }else{
+                    $("#trial_div").show();
+                    $("#referal_div").hide();
+                    $("#referal_code_div").hide();
+                }
+            });
         });
     </script>
 @endsection

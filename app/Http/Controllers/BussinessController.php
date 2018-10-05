@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\BusinessPackage;
+use App\BusinessTemplate;
 use App\BusinessType;
 use App\Package;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class BussinessController extends Controller
 {
@@ -46,6 +49,10 @@ class BussinessController extends Controller
         //
     }
 
+    public function getBizTemplate($id){
+        $template = BusinessTemplate::where('business_id',$id)->first();
+        return response()->json(['template'=>$template]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -78,9 +85,90 @@ class BussinessController extends Controller
 
     }
 
-    public function packagesContracts(){
+    public function packagesContracts(Request $request){
+        DB::beginTransaction();
+        try{
+            $business = Business::where('contact_person_id', Auth::user()->id)->first();
+            $template = BusinessTemplate::where('business_id',$business->id)->first();
+            if(is_null($template)){
+                $input = $request->all();
+                if(array_key_exists("logo",$input)){
+                    $file = $input['logo'];
+                    $ext  = $file->getClientOriginalExtension();
+                    $filename = md5(str_random(5)).'.'.$ext;
+                    $name = 'logo_url';
+                    if($file->move('business_images/',$filename)){
+                        $this->arr[$name] = 'business_images/'.$filename;
+                    }
+                    $input['logo_url'] = $this->arr[$name];
+                }
+                if(array_key_exists("banner",$input)){
+                    $file = $input['banner'];
+                    $ext  = $file->getClientOriginalExtension();
+                    $banner_name = md5(str_random(5)).'.'.$ext;
+                    $name = 'banner_url';
+                    if($file->move('business_images/',$banner_name)){
+                        $this->arr[$name] = 'business_images/'.$banner_name;
+                    }
+                    $input['banner_url'] = $this->arr[$name];
+                }
+                $businessTemplate = BusinessTemplate::create($input);
+                DB::commit();
+                return response()->json(["businessTemplate"=>$businessTemplate]);
+            }else{
+                $input = $request->all();
+                if(array_key_exists("logo",$input)){
+                    $file = $input['logo'];
+                    $ext  = $file->getClientOriginalExtension();
+                    $filename = md5(str_random(5)).'.'.$ext;
+                    $name = 'logo_url';
+                    if($file->move('business_images/',$filename)){
+                        $this->arr[$name] = 'business_images/'.$filename;
+                    }
+                    $input['logo_url'] = $this->arr[$name];
+                }
+                if(array_key_exists("banner",$input)){
+                    $file = $input['banner'];
+                    $ext  = $file->getClientOriginalExtension();
+                    $banner_name = md5(str_random(5)).'.'.$ext;
+                    $name = 'banner_url';
+                    if($file->move('business_images/',$banner_name)){
+                        $this->arr[$name] = 'business_images/'.$banner_name;
+                    }
+                    $input['banner_url'] = $this->arr[$name];
+                }
+                $template->update($input);
+                DB::commit();
+                return response()->json(["businessTemplate"=>$template]);
+            }
+        }catch(\Exception $e){
+            dd($e);
+           DB::rollback();
+        }
+
+    }
+
+    public function saveBizPackage($package){
+
+        DB::beginTransaction();
+        try{
+            $business = Business::where('contact_person_id', Auth::user()->id)->first();
+            $businessPackage = BusinessPackage::create(['package_id'=>(int)$package,"business_id"=> $business->id]);
+            DB::commit();
+            return response()->json(['business_package'=>$businessPackage]);
+
+        }catch(\Exception $e){
+            DB::rollback();
+//            throw $e;
+            return response()->json(['error'=>$e->getMessage()]);
+        }
+    }
+
+    public function navigateToPackages(){
         $packages = Package::all();
-        return view('bussiness.packages_contracts',compact('packages'));
+        $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        $template = BusinessTemplate::where('business_id',$business->id)->first();
+        return view('bussiness.packages_contracts',compact('packages','template'));
     }
 
     /**

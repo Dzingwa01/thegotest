@@ -16,47 +16,44 @@
 <body>
 <div class="navbar-fixed container-fluid">
 
-        <nav class="white" role="navigation" style="height: 5em;">
-            <div class="nav-wrapper ">
-                <a id="logo-container" href="{{url('/')}}" class="brand-logo"><img height="60px" src="{{URL::asset('/img/the_go_logo.png')}}" />  </a>
-                <a href="#" data-target="slide-out" class="sidenav-trigger" style="color:teal"><i class="material-icons">menu</i></a>
-                <ul id="dropdown1" class="dropdown-content">
-                    <a  class="" href="{{ url('/login') }}">Sign  In</a><br/>
-                    <a  class="" href="{{ url('/register') }}">Register</a>
-                </ul>
-                <ul id="dropdown2" class="dropdown-content">
-                    <a  class="" href="{{ url('/login') }}">Sign  In</a><br/>
-                    <a  class="" href="{{ url('/register') }}">Register</a>
-                </ul>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{url('/')}}">Home</a></li>
-                    <li><a href="{{url('/login')}}">Register Business</a></li>
-                    {{--<li><a href="#">Favourites</a></li>--}}
-                    <li>
-                        <a style="color:black;font-weight: bolder;"  class="dropdown-trigger_cus2" data-toggle="dropdown" href="#dropdown2">
-                            <i class="material-icons left">person_pin</i>
-                            Account
-                            <span class="caret"></span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul id="slide-out" class="sidenav">
-                    <li><a href="{{url('/')}}">Home</a></li>
-                    <li><a href="{{url('/login')}}">Register Business</a></li>
-                    <li><a href="#">Favourites</a></li>
-                    <li>
-                        <a style="color:black;font-weight: bolder;"  class="dropdown-trigger_cus2" data-toggle="dropdown" href="#dropdown1">
-                            <i class="material-icons left">person_pin</i>
-                            Account
-                            <span class="caret"></span>
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </nav>
+    <nav class="white" role="navigation" style="height: 5em;">
+        <div class="nav-wrapper ">
+            <a id="logo-container" href="{{url('/')}}" class="brand-logo"><img height="60px" src="{{URL::asset('/img/the_go_logo.png')}}" />  </a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger" style="color:teal"><i class="material-icons">menu</i></a>
+            <ul id="dropdown1" class="dropdown-content">
+                <a  class="" href="{{ url('/login') }}">Sign  In</a><br/>
+                <a  class="" href="{{ url('/register') }}">Register</a>
+            </ul>
+            <ul id="dropdown2" class="dropdown-content">
+                <a  class="" href="{{ url('/login') }}">Sign  In</a><br/>
+                <a  class="" href="{{ url('/register') }}">Register</a>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{url('/')}}">Home</a></li>
+                {{--<li><a href="{{url('/login')}}">Register Business</a></li>--}}
+                {{--<li><a href="#">Favourites</a></li>--}}
+                <li>
+                    <a style="color:black;font-weight: bolder;"  class="dropdown-trigger_cus2" data-toggle="dropdown" href="#dropdown2">
+                        <i class="material-icons left">person_pin</i>
+                        Account
+                        <span class="caret"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="slide-out" class="sidenav">
+                <li><a href="{{url('/')}}">Home</a></li>
+                {{--<li><a href="{{url('/login')}}">Register Business</a></li>--}}
+                {{--<li><a href="#">Favourites</a></li>--}}
+                <li>
+                    <a style="color:black;font-weight: bolder;"  class="dropdown-trigger_cus2" data-toggle="dropdown" href="#dropdown1">
+                        <i class="material-icons left">person_pin</i>
+                        Account
+                        <span class="caret"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 </div>
 <div class="row">

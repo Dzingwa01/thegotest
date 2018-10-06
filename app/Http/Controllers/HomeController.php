@@ -41,13 +41,17 @@ class HomeController extends Controller
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
         }else{
-            $user = Auth::user();
-            $business = Business::where('contact_person_id',$user->id)->first();
-            if(is_null($business)){
-                return view('adminlte::guest_home',compact('user'));
+            if($user->verified==0){
+                return view('status.status_message_not_activated');
             }else{
-                $template = BusinessTemplate::where('business_id',$business->id)->first();
-                return view('business-portal.portal',compact('business','template'));
+                $user = Auth::user();
+                $business = Business::where('contact_person_id',$user->id)->first();
+                if(is_null($business)){
+                    return view('adminlte::guest_home',compact('user'));
+                }else{
+                    $template = BusinessTemplate::where('business_id',$business->id)->first();
+                    return view('business-portal.portal',compact('business','template'));
+                }
             }
 
         }

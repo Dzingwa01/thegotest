@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Jobs\SendVerificationEmail;
+use Illuminate\Http\Request;
 use App\User;
 use Validator;
+use DB;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 
 /**
  * Class RegisterController
@@ -24,7 +28,8 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+//    use RegistersUsers;
+    protected $redirectTo = '/account_creation_success';
 
     /**
      * Show the application registration form.
@@ -41,7 +46,6 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -64,6 +68,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'contact_number'=>'required',
             'password' => 'required|min:6|confirmed',
             'terms' => 'required',
         ]);
@@ -75,12 +80,50 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
+    public function register(Request $request){
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        return  redirect($this->redirectTo);
+    }
     protected function create(array $data)
     {
-        return User::create([
+        DB::beginTransaction();
+        try {
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'contact_number' => $data['contact_number'],
             'password' => bcrypt($data['password']),
+            'verified'=>0,
+            'verification_token'=>base64_encode($data['email']),
         ]);
+            $role = Role::where('name','guest_user')->first();
+            $user->attachRole($role);
+            DB::commit();
+            event($user);
+            dispatch(new SendVerificationEmail($user));
+
+        }
+        catch (\Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+    }
+    public function verify($token)
+    {
+        $user = User::where('verification_token', $token)->first();
+        $user->verified = 1;
+        if ($user->save()) {
+            return view('emails.registration_success', ['user' => $user]);
+        }
+    }
+
+    public function accountSuccess(){
+
+        return view('status.status_message');
+    }
+
+    public function accountNotRegistered(){
+        return view('status.status_message_not_activated');
     }
 }

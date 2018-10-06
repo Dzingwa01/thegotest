@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/account-creation-success','Auth\RegisterController@accountSuccess');
+
 Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');
 
 Route::resource('businesses', 'BussinessController');
@@ -51,6 +53,9 @@ Route::post('/update_bussiness_type/{type}','UserController@updateBussinessType'
 
 Route::get('bussiness_types','UserController@showBusinessTypes')->name('bussiness_types');
 Route::get('the_go_tcs','HomeController@getTCS');
+Route::get('/account_not_verified','Auth\RegisterController@accountNotRegistered');
+Route::get('/verify_email/{token}', 'Auth\RegisterController@verify');
+Route::get('/account_creation_success','Auth\RegisterController@accountSuccess');
 Route::group(['middleware' => 'auth'], function () {
         Route::get('/link1', function ()    {
         // Uses Auth Middleware

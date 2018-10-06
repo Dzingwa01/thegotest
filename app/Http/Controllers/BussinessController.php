@@ -148,6 +148,13 @@ class BussinessController extends Controller
 
     }
 
+    public function showBizPortal(){
+        $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        $template = BusinessTemplate::where('business_id',$business->id)->first();
+        return view('business-portal.portal',compact('business','template'));
+    }
+
+
     public function saveBizPackage($package){
 
         DB::beginTransaction();
@@ -159,7 +166,6 @@ class BussinessController extends Controller
 
         }catch(\Exception $e){
             DB::rollback();
-//            throw $e;
             return response()->json(['error'=>$e->getMessage()]);
         }
     }

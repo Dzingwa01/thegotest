@@ -12,6 +12,7 @@ use DB;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use LasseRafn\Initials\Initials;
 
 class UserController extends Controller
 {
@@ -19,6 +20,18 @@ class UserController extends Controller
     {
 
         return view('users.index');
+    }
+
+    public function getAvatar(){
+        $avatar = new LasseRafn\InitialAvatarGenerator\InitialAvatar();
+        return $avatar->name('Lasse Rafn')
+            ->length(2)
+            ->fontSize(0.5)
+            ->size(96) // 48 * 2
+            ->background('#8BC34A')
+            ->color('#fff')
+            ->generate()
+            ->stream('png', 100);
     }
 
     public function bussinessTypesIndex()

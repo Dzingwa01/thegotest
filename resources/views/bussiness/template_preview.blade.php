@@ -6,8 +6,8 @@
             <div id="normal_tracker" class="step-container" style="width: 500px; margin: 0 auto"></div>
         </div>
         <div class="row">
-            <form class="col s12 card" method="post" action="{{url('template_selection')}}" >
-                {{ csrf_field() }}
+            <form class="col s12 card" >
+
                 <p>{{$business->business_name}}, thank you for signing up. An email has been sent to {{$business->business_email}} with all
                 the neccessary package and contract information.</p>
                 <div class="row" style="margin-top:2em;margin-left: 2em;">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row">
                     <div class="col offset-s5">
-                        <button type="submit" class="btn btn-success">Finish <i class="material-icons right">send</i></button>
+                        <button id="finish_signup" class="btn btn-success">Finish <i class="material-icons right">send</i></button>
                     </div>
                 </div>
             </form>
@@ -56,6 +56,10 @@
             $('.step-container').stepMaker({
                 steps: ['Business Signup', 'Template Info', 'Packages&Contracts','Finish'],
                 currentStep: 4
+            });
+            $("#finish_signup").on('click',function(e){
+                e.preventDefault();
+               window.location.href = "/business-portal";
             });
             $("#referal_div").hide();
             $("#referal_code_div").hide();

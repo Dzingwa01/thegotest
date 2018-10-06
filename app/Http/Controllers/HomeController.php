@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\BusinessTemplate;
 use App\BusinessType;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -40,7 +41,15 @@ class HomeController extends Controller
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
         }else{
-            return view('adminlte::guest_home',compact('user'));
+            $user = Auth::user();
+            $business = Business::where('contact_person_id',$user->id)->first();
+            if(is_null($business)){
+                return view('adminlte::guest_home',compact('user'));
+            }else{
+                $template = BusinessTemplate::where('business_id',$business->id)->first();
+                return view('business-portal.portal',compact('business','template'));
+            }
+
         }
     }
 

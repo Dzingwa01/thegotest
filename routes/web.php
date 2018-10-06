@@ -29,6 +29,8 @@ Route::get('get_packages','PackageController@getPackages')->name('get_packages')
 Route::get('packages/delete/{id}','PackageController@destroy');
 Route::post('packages/update/{package}','PackageController@update');
 Route::get('/save_package/{package}','BussinessController@saveBizPackage');
+Route::get('/business-portal','BussinessController@showBizPortal');
+Route::get('/get-avatar','UserController@getAvatar');
 
 Route::get('biz_types_index','UserController@bussinessTypesIndex');
 Route::post('template_selection','UserController@templateSelection');

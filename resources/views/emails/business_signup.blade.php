@@ -3,7 +3,7 @@
     <div class="container">
         <h4 class="center">Dear {{$business->business_name}},</h4>
         <div class="row">
-            <p style="color:black;" class="center"> 
+            <p style="color:black;" class="center">
                 Thank you for signing up with TheGo. We are dedicated to assist in making your marketting easier and efficient
                 .Please find attached our terms and conditions, invoice and package information. Below is a brief outline of your package information.<br/>
             </p>

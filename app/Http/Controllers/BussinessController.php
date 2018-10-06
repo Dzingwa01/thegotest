@@ -6,6 +6,7 @@ use App\Business;
 use App\BusinessPackage;
 use App\BusinessTemplate;
 use App\BusinessType;
+use App\Jobs\ProcessSignup;
 use App\Package;
 use Illuminate\Http\Request;
 use DB;
@@ -88,6 +89,7 @@ class BussinessController extends Controller
     public function packagesContracts(Request $request){
         DB::beginTransaction();
         try{
+            $user = Auth::user();
             $business = Business::where('contact_person_id', Auth::user()->id)->first();
             $template = BusinessTemplate::where('business_id',$business->id)->first();
             if(is_null($template)){
@@ -114,6 +116,8 @@ class BussinessController extends Controller
                 }
                 $businessTemplate = BusinessTemplate::create($input);
                 DB::commit();
+//                event($user,$business);
+//                dispatch(new ProcessSignup($user,$business));
                 return response()->json(["businessTemplate"=>$businessTemplate]);
             }else{
                 $input = $request->all();
@@ -139,11 +143,14 @@ class BussinessController extends Controller
                 }
                 $template->update($input);
                 DB::commit();
+//                event($user,$business);
+//                dispatch(new ProcessSignup($user,$business));
                 return response()->json(["businessTemplate"=>$template]);
             }
         }catch(\Exception $e){
-            dd($e);
-           DB::rollback();
+            DB::rollback();
+            throw $e;
+
         }
 
     }
@@ -159,9 +166,12 @@ class BussinessController extends Controller
 
         DB::beginTransaction();
         try{
-            $business = Business::where('contact_person_id', Auth::user()->id)->first();
+            $user = Auth::user();
+            $business = Business::where('contact_person_id', $user->id)->first();
             $businessPackage = BusinessPackage::create(['package_id'=>(int)$package,"business_id"=> $business->id]);
             DB::commit();
+            event($user,$business);
+            dispatch(new ProcessSignup($user,$business));
             return response()->json(['business_package'=>$businessPackage]);
 
         }catch(\Exception $e){

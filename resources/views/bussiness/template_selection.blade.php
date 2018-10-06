@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12 m6">
-                        <img id="item_image" src="" class="img-responsive" width="250px; height:250px"/>   <br>
+                        <img id="item_image" src="" class="img-responsive" width="200px; height:200px"/>   <br>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>Upload Logo</span>

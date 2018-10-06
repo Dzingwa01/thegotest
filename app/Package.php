@@ -12,4 +12,8 @@ class Package extends Model
     protected $fillable = ['package_name','package_description','package_price'];
 
     protected $dates = ['deleted_at'];
+
+    public function features(){
+        $this->hasMany('App\Features','package_id');
+    }
 }

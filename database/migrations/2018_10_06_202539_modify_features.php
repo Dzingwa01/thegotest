@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyUser2 extends Migration
+class ModifyFeatures extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class ModifyUser2 extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->integer("verification_token")->nullable();
+        //
+        Schema::table('features', function (Blueprint $table) {
+            $table->timestamps();
         });
+
     }
 
     /**
@@ -26,9 +27,10 @@ class ModifyUser2 extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn("verification_token");
+        //
+        Schema::table('features', function (Blueprint $table) {
+            $table->dropColumn('created_at');
         });
+
     }
 }

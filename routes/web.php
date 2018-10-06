@@ -26,10 +26,17 @@ Route::post('business/update/{package}','BussinessController@update');
 Route::post('packages_contracts','BussinessController@packagesContracts')->name('package_contracts');
 Route::get('packages-contracts','BussinessController@navigateToPackages');
 Route::resource('packages', 'PackageController');
+Route::resource('package_features', 'PackageFeatureController');
+
 Route::get('/get-biz-template/{id}','BussinessController@getBizTemplate');
 Route::get('get_packages','PackageController@getPackages')->name('get_packages');
+Route::get('get_features','PackageFeatureController@getPackageFeatures')->name('get_features');
+
 Route::get('packages/delete/{id}','PackageController@destroy');
 Route::post('packages/update/{package}','PackageController@update');
+Route::get('package_features/delete/{id}','PackageFeatureController@destroy');
+Route::post('package_features/update/{package}','PackageFeatureController@update');
+
 Route::get('/save_package/{package}','BussinessController@saveBizPackage');
 Route::get('/business-portal','BussinessController@showBizPortal');
 Route::get('/get-avatar','UserController@getAvatar');

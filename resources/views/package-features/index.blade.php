@@ -20,7 +20,7 @@
             <div class="col m3">
                 <a id="" style="margin-top: 1em;margin-left: 1em;" class="btn btn-success" data-toggle="modal"
                    data-target="#add_package"><i
-                            class="fa fa-plus"></i>Add Business Package</a><br/>
+                            class="fa fa-plus"></i>Add Package Feature</a><br/>
             </div>
             <br>
         </div>
@@ -31,7 +31,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Price</th>
                         <th>Created At</th>
                         <th>Action</th>
                     </tr>
@@ -44,38 +43,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Business Package</h4>
+                    <h4 class="modal-title">Add Package Feature</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('packages.store') }}">
+                    <form method="POST" action="{{ route('package_features.store') }}">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="name">Package Name</label>
-                            <input placeholder="Package Name" id="package_name" name="package_name" type="text" class="form-control" required>
+                            <label for="feature_name">Feature Name</label>
+                            <input placeholder="Feature Name" id="feature_name" name="feature_name" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">Package Description</label>
-                            <textarea class="form-control" id="package_description" name="package_description" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Package Price</label>
-                            <input class="form-control" id="package_price" name="package_price" type="number" step="0.01" required>
-                        </div>
-                        <hr/>
-                        <h4 class="center">Package Features</h4>
-                        <div class="row">
-
-                            @foreach($packageFeature as $feature)
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input id="{{$feature->id}}" type="checkbox" class="form-check-input" name="{{$feature->id}}">
-                                    <label class="form-check-label" for="{{$feature->id}}">{{$feature->feature_name}}</label>
-                                </div>
-                            </div>
-                            @endforeach
+                            <label for="feature_description">Feature Description</label>
+                            <textarea class="form-control" id="feature_description" name="feature_description" rows="3" required></textarea>
                         </div>
 
                         <div class="row">
@@ -100,11 +82,10 @@
                 $('#packages-table').dataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{{route('get_packages')}}',
+                    ajax: '{{route('get_features')}}',
                     columns: [
-                        {data: 'package_name', name: 'package_name'},
-                        {data: 'package_description', name: 'package_description'},
-                        {data:'package_price',name:'package_price'},
+                        {data: 'feature_name', name: 'feature_name'},
+                        {data: 'feature_description', name: 'feature_description'},
                         {data: 'created_at', name: 'created_at'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]

@@ -42,7 +42,14 @@
                     <li><a href="{{url('biz_types_index')}}">Business Types</a></li>
                 </ul>
             </li>
-            <li class=""><a href="{{ url('packages') }}"><i class='fa fa-home'></i> <span>Packages</span></a></li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-briefcase'></i> <span>Packages</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('packages') }}"> <span>Packages</span></a></li>
+                    <li><a href="{{url('package_features')}}">Package features</a></li>
+                </ul>
+            </li>
+
             <li class=""><a href="#"><i class='fa fa-home'></i> <span>Promotions</span></a></li>
             <hr>
             <li class="treeview">

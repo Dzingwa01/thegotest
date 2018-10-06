@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Feature;
-use App\Package;
 use App\PackageFeature;
 use Illuminate\Http\Request;
-use App\User;
-use App\Role;
 use DB;
 use Hash;
 use Yajra\DataTables\Facades\DataTables;
 
-class PackageController extends Controller
+class PackageFeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +19,7 @@ class PackageController extends Controller
     {
         //
         $packageFeature = PackageFeature::all();
-//        dd($packageFeature);
-        return view('packages.index',compact('packageFeature'));
+        return view('package-features.index',compact('packageFeature'));
     }
 
     /**
@@ -33,13 +28,13 @@ class PackageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getPackages(){
-        $packages = Package::all();
+    public function getPackageFeatures(){
+        $packages = PackageFeature::all();
 //        dd($types);
         return Datatables::of($packages)->addColumn('action', function ($package) {
-            $re = 'packages/' . $package->id;
-            $sh = 'packages/' . $package->id.'/edit';
-            $del = 'packages/delete/' . $package->id;
+            $re = 'package_features/' . $package->id;
+            $sh = 'package_features/' . $package->id.'/edit';
+            $del = 'package_features/delete/' . $package->id;
             return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
         })
             ->make(true);
@@ -59,23 +54,14 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         //
-       $features = array_keys($request->except(['package_name','package_description','package_price','_token','q']));
-
         DB::beginTransaction();
         try{
-            $package = Package::create($request->all());
-            foreach ($features as $feature)
-            {
-//                dd($feature);
-               $pack= Feature::create(['package_id'=>$package->id,'package_feature_id'=>$feature]);
-//                dd($pack);
-            }
+            $package = PackageFeature::create($request->all());
             DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " saved successfully"]);
+            return redirect('package_features')->with(['status'=>"Package Feature ".$package->feature_name. " saved successfully"]);
         }catch(\Exception $e){
-            throw $e;
             DB::rollback();
-            return redirect('packages')->with(['error'=>"Error saving package ".$package->name]);
+            return redirect('package_features')->with(['error'=>"Error saving package feature".$package->feature_name]);
         }
 
     }
@@ -89,8 +75,8 @@ class PackageController extends Controller
     public function show($id)
     {
         //
-        $package = Package::where('id',$id)->first();
-        return view('packages.view',compact('package'));
+        $package = PackageFeature::where('id',$id)->first();
+        return view('package-features.view',compact('package'));
     }
 
     /**
@@ -102,8 +88,8 @@ class PackageController extends Controller
     public function edit($id)
     {
         //
-        $package = Package::where('id',$id)->first();
-        return view('packages.edit',compact('package'));
+        $package = PackageFeature::where('id',$id)->first();
+        return view('package-features.edit',compact('package'));
     }
 
     /**
@@ -113,17 +99,17 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Package $package)
+    public function update(Request $request, PackageFeature $package)
     {
         //
         DB::beginTransaction();
         try{
             $package->update($request->all());
             DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " updated successfully"]);
+            return redirect('package_features')->with(['status'=>"Package Feature ".$package->feature_name. " updated successfully"]);
         }catch(\Exception $e){
             DB::rollback();
-            return redirect('packages')->with(['error'=>"Error updating package ".$package->name]);
+            return redirect('package_features')->with(['error'=>"Error updating package ".$package->feature_name]);
         }
     }
 
@@ -136,15 +122,16 @@ class PackageController extends Controller
     public function destroy($id)
     {
         //
+//        dd($id);
         DB::beginTransaction();
         try{
-            $package = Package::where('id',$id)->first();
+            $package = PackageFeature::where('id',$id)->first();
             $package->delete();
             DB::commit();
-            return redirect('packages')->with(['status'=>"Package ".$package->name. " deleted successfully"]);
+            return redirect('package_features')->with(['status'=>"Package Feature ".$package->feature_name. " deleted successfully"]);
         }catch(\Exception $e){
             DB::rollback();
-            return redirect('packages')->with(['error'=>"Error deleting package ".$package->name]);
+            return redirect('package_features')->with(['error'=>"Error deleting package feature ".$package->feature_name]);
         }
     }
 }

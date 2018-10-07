@@ -30,7 +30,7 @@
                 {{--<div class="background">--}}
                     {{--<img src="{{$template->logo_url}}">--}}
                 {{--</div>--}}
-                <a href="#user"><img class="circle" style="height: 160px;width: 160px;" src="{{$template->logo_url}}"></a>
+                <a href="#user"><img class="circle" style="height: 160px;width: 160px;" src="{{is_null($template)?"":$template->logo_url}}"></a>
                 <a href="#name"><span class="white-text name">{{Auth::user()->name . " ".Auth::user()->surname}}</span></a>
                 <a href="#email"><span class="white-text email">{{$business->business_email}}</span></a>
             </div></li>

@@ -38,19 +38,24 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
         }else{
             if($user->verified==0){
                 return view('status.status_message_not_activated');
             }else{
-                $user = Auth::user();
                 $business = Business::where('contact_person_id',$user->id)->first();
                 if(is_null($business)){
                     return view('adminlte::guest_home',compact('user'));
                 }else{
                     $template = BusinessTemplate::where('business_id',$business->id)->first();
-                    return view('business-portal.portal',compact('business','template'));
+                    if(is_null($template)){
+                        return view('adminlte::guest_home',compact('user'));
+                    }else{
+                        return view('business-portal.portal',compact('business','template'));
+                    }
+
                 }
             }
 

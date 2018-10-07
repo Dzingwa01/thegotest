@@ -40,6 +40,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{url('businesses')}}">Businesses</a></li>
                     <li><a href="{{url('biz_types_index')}}">Business Types</a></li>
+                    <li><a href="{{url('referral_codes')}}">Referal Codes</a></li>
                 </ul>
             </li>
             <li class="treeview">

@@ -27,10 +27,14 @@ Route::post('packages_contracts','BussinessController@packagesContracts')->name(
 Route::get('packages-contracts','BussinessController@navigateToPackages');
 Route::resource('packages', 'PackageController');
 Route::resource('package_features', 'PackageFeatureController');
+Route::resource('referral_codes','ReferralCodeController');
 
 Route::get('/get-biz-template/{id}','BussinessController@getBizTemplate');
 Route::get('get_packages','PackageController@getPackages')->name('get_packages');
 Route::get('get_features','PackageFeatureController@getPackageFeatures')->name('get_features');
+Route::get('get_codes','ReferralCodeController@getReferralCodes')->name('get_codes');
+Route::get('referral_codes/delete/{id}','ReferralCodeController@destroy');
+Route::get('verify_referral_code/{code}','ReferralCodeController@verifyCode');
 
 Route::get('packages/delete/{id}','PackageController@destroy');
 Route::post('packages/update/{package}','PackageController@update');

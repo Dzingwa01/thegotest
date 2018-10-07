@@ -116,8 +116,8 @@ class BussinessController extends Controller
                 }
                 $businessTemplate = BusinessTemplate::create($input);
                 DB::commit();
-//                event($user,$business);
-//                dispatch(new ProcessSignup($user,$business));
+                event($user,$business);
+                dispatch(new ProcessSignup($user,$business));
                 return response()->json(["businessTemplate"=>$businessTemplate]);
             }else{
                 $input = $request->all();
@@ -150,9 +150,7 @@ class BussinessController extends Controller
         }catch(\Exception $e){
             DB::rollback();
             throw $e;
-
         }
-
     }
 
     public function showBizPortal(){
@@ -170,8 +168,8 @@ class BussinessController extends Controller
             $business = Business::where('contact_person_id', $user->id)->first();
             $businessPackage = BusinessPackage::create(['package_id'=>(int)$package,"business_id"=> $business->id]);
             DB::commit();
-            event($user,$business);
-            dispatch(new ProcessSignup($user,$business));
+//            event($user,$business);
+//            dispatch(new ProcessSignup($user,$business));
             return response()->json(['business_package'=>$businessPackage]);
 
         }catch(\Exception $e){

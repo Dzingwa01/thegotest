@@ -121,8 +121,6 @@ class PackageFeatureController extends Controller
      */
     public function destroy($id)
     {
-        //
-//        dd($id);
         DB::beginTransaction();
         try{
             $package = PackageFeature::where('id',$id)->first();

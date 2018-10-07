@@ -23,21 +23,28 @@
                             <span>Yes</span>
                         </label>
                     </p>
-                    <div id="referal_div" class="input-field col m6 s12">
+                    <div id="referal_div"  class="input-field col m6 s12">
                         <label for="referral_code">Referal Code</label>
                         <input type="text" class="validate" id="referral_code" name="referal_code"  >
+                        <div id="progress_div" hidden>
+                            <label for="progress">Verifying code</label>
+                            <progress id="progress"></progress>
+                        </div>
                     </div>
 
                 </div>
-                <div id="trial_div" class="row" style="margin-left: 2em;">
+                <span id="verification_result_referral" hidden></span>
+                <div id="trial_div" hidden class="row" style="margin-left: 2em;">
+                    <span id="verification_result"></span>
                     <p> Your free trial will expire in 30 days</p>
                 </div>
-                <div id="referal_code_div" style="margin-left: 2em;" class="row">
+                <div id="referal_code_div" hidden style="margin-left: 2em;" class="row">
+
                     <p> Your free trial will expire in 45 days</p>
                 </div>
                 <div class="row">
                     <div class="col offset-s5">
-                        <button id="finish_signup" class="btn btn-success">Finish <i class="material-icons right">send</i></button>
+                        <button id="finish_signup" disabled="true" class="btn btn-success">Finish <i class="material-icons right">send</i></button>
                     </div>
                 </div>
             </form>
@@ -68,14 +75,43 @@
             $('input:radio').click(function () {
                 var selected_val = $(this).val();
                 if(selected_val=="yes"){
+                    $("#finish_signup").attr("disabled",true);
                     $("#referal_div").show();
-                    $("#referal_code_div").show();
+//                    $("#referal_code_div").show();
                     $("#trial_div").hide();
                 }else{
+                    $("#finish_signup").attr("disabled",false);
                     $("#trial_div").show();
-                    $("#referal_div").hide();
+//                    $("#referal_div").hide();
+                    $("#verification_result_referral").hide();
                     $("#referal_code_div").hide();
+                    $("#referal_div").hide();
                 }
+            });
+
+            $('#referral_code').blur(function(){
+                var input=$(this).val();
+                $("#progress_div").show();
+                //do your ajax call here
+                $.get('/verify_referral_code/'+input,function(data){
+                    console.log("data",data);
+                    if(data.status==1){
+                        $("#verification_result_referral").show();
+                        $("#finish_signup").attr("disabled",false);
+                        $("#verification_result_referral").empty();
+                        $("#verification_result_referral").append(data.message);
+                        $("#progress_div").hide();
+                        $("#referal_code_div").show();
+                    }else{
+                        $("#verification_result_referral").show();
+                        $("#referal_code_div").hide();
+                        $("#finish_signup").attr("disabled",true);
+                        $("#verification_result_referral").empty();
+                        $("#verification_result_referral").append(data.message);
+                        $("#progress_div").hide();
+                    }
+                });
+
             });
         });
     </script>

@@ -18,6 +18,18 @@
                 <label for="description">Package Price</label>
                 <input class="form-control" id="package_price" name="package_price" type="number" required step="0.01" value="{{$package->package_price}}">
             </div>
+            <h4 class="center">Package Features</h4>
+            <div class="row">
+
+                @foreach($packageFeature as $feature)
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input id="{{$feature->id}}" type="checkbox" class="form-check-input" name="{{$feature->id}}">
+                            <label class="form-check-label" for="{{$feature->id}}">{{$feature->feature_name}}</label>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
             <div class="row">
                 <button type="submit" class="btn btn-success pull-right" style="margin:1em;">Submit</button>
             </div>

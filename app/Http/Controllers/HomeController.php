@@ -8,9 +8,12 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\BusinessPackage;
 use App\BusinessTemplate;
 use App\BusinessType;
+use App\Feature;
 use App\Http\Requests;
+use App\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,7 +56,13 @@ class HomeController extends Controller
                     if(is_null($template)){
                         return view('adminlte::guest_home',compact('user'));
                     }else{
-                        return view('business-portal.portal',compact('business','template'));
+                        $business = Business::where('contact_person_id',$user->id)->first();
+                        $template = BusinessTemplate::where('business_id',$business->id)->first();
+                        $package = BusinessPackage::join('packages','packages.id','business_packages.package_id')
+                                ->where('business_id',$business->id)->first();
+                        $package_features = Feature::join('package_features','package_features.id','features.package_feature_id')->where('package_id',$package->id)
+                            ->get();
+                        return view('business-portal.portal',compact('business','template','package','package_features'));
                     }
 
                 }

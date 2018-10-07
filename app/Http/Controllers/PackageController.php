@@ -102,8 +102,9 @@ class PackageController extends Controller
     public function edit($id)
     {
         //
+        $packageFeature = PackageFeature::all();
         $package = Package::where('id',$id)->first();
-        return view('packages.edit',compact('package'));
+        return view('packages.edit',compact('package','packageFeature'));
     }
 
     /**
@@ -116,9 +117,17 @@ class PackageController extends Controller
     public function update(Request $request, Package $package)
     {
         //
+        $features = array_keys($request->except(['package_name','package_description','package_price','_token','q']));
+//
         DB::beginTransaction();
         try{
             $package->update($request->all());
+            $result = Feature::where('package_id',$package->id)->delete();
+//            dd($result);
+            foreach ($features as $feature)
+            {
+                $pack= Feature::create(['package_id'=>$package->id,'package_feature_id'=>$feature]);
+            }
             DB::commit();
             return redirect('packages')->with(['status'=>"Package ".$package->name. " updated successfully"]);
         }catch(\Exception $e){

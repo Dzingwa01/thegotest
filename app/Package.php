@@ -14,6 +14,6 @@ class Package extends Model
     protected $dates = ['deleted_at'];
 
     public function features(){
-        $this->hasMany('App\Features','package_id');
+        $this->hasMany('App\Feature','package_id');
     }
 }

@@ -14,7 +14,10 @@
                 <label for="description">Feature Description</label>
                 <textarea class="form-control" id="feature_description" name="feature_description" rows="5" required>{{$package->feature_description}}</textarea>
             </div>
-
+            <div id="referral_div" class="form-group" style="margin-top:1em;" hidden>
+                <label for="generated_code">Code Duration(months)</label>
+                <input placeholder="Code Duration(months)" class="form-control" id="duration" name="duration" value=""  required>
+            </div>
             <div class="row">
                 <button type="submit" class="btn btn-success pull-right" style="margin:1em;">Submit</button>
             </div>

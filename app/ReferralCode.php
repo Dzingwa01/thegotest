@@ -9,5 +9,5 @@ class ReferralCode extends Model
 {
     use SoftDeletes;
     //
-    protected $fillable = ['email_address','generated_code'];
+    protected $fillable = ['email_address','generated_code','duration','activated'];
 }

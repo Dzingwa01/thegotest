@@ -31,6 +31,8 @@
                     <tr>
                         <th>Email Address</th>
                         <th>Referral Code</th>
+                        <th>Duration</th>
+                        <th>Redeemed</th>
                         <th>Created At</th>
                         <th>Action</th>
                     </tr>
@@ -43,7 +45,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Package Feature</h4>
+                    <h4 class="modal-title">Generate Referal code</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -55,6 +57,11 @@
                             <label for="feature_name">Email Address</label>
                             <input placeholder="Email Address" id="email_address" name="email_address" type="text" class="form-control" required>
                         </div>
+
+                        <div id="duration" class="form-group" style="margin-top:1em;" >
+                            <label for="duration">Code Duration(months)</label>
+                            <input placeholder="Code Duration(months)" class="form-control" id="duration" name="duration"  required>
+                        </div>
                         <div class="row">
                             <button style="margin-left: 1em;" class="btn btn-primary" id="generator">Generate Code</button>
                         </div>
@@ -62,6 +69,7 @@
                             <label for="generated_code">Referral Code</label>
                             <input placeholder="Referral Code" class="form-control" id="generated_code" name="generated_code"  required>
                         </div>
+
 
                         <div class="row">
                             <button type="submit" class="btn btn-success pull-right" style="margin:1em;">Save</button>
@@ -73,12 +81,10 @@
             </div>
         </div>
     </div>
-
     @push('custom-scripts')
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" charset="utf8"
                 src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-
         <script>
             $(function () {
                 $('#packages-table').dataTable({
@@ -88,6 +94,8 @@
                     columns: [
                         {data: 'email_address', name: 'email_address'},
                         {data: 'generated_code', name: 'generated_code'},
+                        {data:'duration',name:'duration'},
+                        {data:'activated',name:'activated'},
                         {data: 'created_at', name: 'created_at'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]

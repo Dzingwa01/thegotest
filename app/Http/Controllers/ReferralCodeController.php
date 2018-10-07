@@ -29,9 +29,9 @@ class ReferralCodeController extends Controller
     public function getReferralCodes(){
         $codes = ReferralCode::all();
         return Datatables::of($codes)->addColumn('action', function ($code) {
-            $re = 'referral_codes/' . $code->id;
+//            $re = 'referral_codes/' . $code->id;
             $del = 'referral_codes/delete/' . $code->id;
-            return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
+            return '<a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
         })
             ->make(true);
     }

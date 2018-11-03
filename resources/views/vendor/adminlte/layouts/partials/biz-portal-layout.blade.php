@@ -169,15 +169,6 @@
             },
         });
         M.AutoInit();
-
-//        $('select').formSelect();
-//        $('.slider').slider();
-//        $('.sidenav').sidenav({
-//            draggable:true
-//        });
-//        $('.dropdown-trigger_cus').dropdown();
-//        $('.dropdown-trigger_cus_2').dropdown();
-
     });
     function dashboard_show(){
 //        alert("show");

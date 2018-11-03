@@ -63,18 +63,27 @@
                     <ul>
                         <li><a style="color:black;font-weight: bolder" class="" href="#!"><i
                                         class="tiny material-icons">account_circle</i>Manage Profile</a></li>
-                        <li><a style="color:black;font-weight: bolder" href="{{ url('/logout') }}" class=""
-                               onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();"><i
-                                        class="fa fa-sign-out-alt"></i>
-                                Sign Out
-                            </a></li>
 
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                             <input type="submit" value="logout" style="display: none;">
                         </form>
                     </ul>
+                </div>
+            </li>
+        </ul>
+        <hr/>
+        <ul class="collapsible popout">
+            <li>
+                <div class="collapsible-header">
+                    <a style="color:black;" href="{{ url('/logout') }}" class=""
+                                                                                           onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><i
+                                class="fa fa-sign-out-alt"></i>
+                        Sign Out
+                    </a>
+                </div>
+                <div class="collapsible-body" >
                 </div>
             </li>
         </ul>

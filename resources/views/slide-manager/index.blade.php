@@ -62,7 +62,7 @@
                             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="duration">Slide Duration</label>
+                            <label for="duration">Slide Duration (Months)</label>
                             <input class="form-control" id="duration" name="duration" type="number" required>
                         </div>
                         <div class="form-group">

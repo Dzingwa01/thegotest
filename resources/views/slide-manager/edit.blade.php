@@ -16,7 +16,7 @@
                     <textarea class="form-control" id="description" name="description" rows="3" required>{{$slide->description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="duration">Slide Duration</label>
+                    <label for="duration">Slide Duration (Months)</label>
                     <input class="form-control" id="duration" name="duration" type="number" value="{{$slide->duration}}" required>
                 </div>
                 <div class="form-group">

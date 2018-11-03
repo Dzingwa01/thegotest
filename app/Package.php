@@ -9,11 +9,9 @@ class Package extends Model
 {
     //
     use SoftDeletes;
-    protected $fillable = ['package_name','package_description','package_price'];
+    protected $fillable = ['package_name','package_description','package_price','active','duration'];
 
-    protected $dates = ['deleted_at'];
-
-    public function features(){
-        $this->hasMany('App\Feature','package_id');
+    public function package_features(){
+        $this->belongsToMany(PackageFeature::class,'features')->withTimestamps();
     }
 }

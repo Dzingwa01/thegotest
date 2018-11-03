@@ -6,8 +6,10 @@ use App\Business;
 use App\BusinessPackage;
 use App\BusinessTemplate;
 use App\BusinessType;
+use App\Feature;
 use App\Jobs\ProcessSignup;
 use App\Package;
+use App\PackageFeature;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
@@ -154,9 +156,15 @@ class BussinessController extends Controller
     }
 
     public function showBizPortal(){
+
         $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        $package = BusinessPackage::join('packages','packages.id','business_packages.package_id')
+                 ->where('business_id',$business->id)->first();
+        $package_features = Feature::where('package_id',$package->id)->get();
+//        dd($package_features);
         $template = BusinessTemplate::where('business_id',$business->id)->first();
-        return view('business-portal.portal',compact('business','template'));
+
+        return view('business-portal.portal',compact('business','template','package_features'));
     }
 
 

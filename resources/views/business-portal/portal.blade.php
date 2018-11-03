@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row flexbox" style="margin-left: 2em;margin-right: 2em;">
             @foreach($package_features as $feature)
-                <div class="col s12 m4">
+                <div class="col s12 m6">
                     <div class="card">
                         <div class="card-content" style="height: 300px;overflow-y: scroll">
                             <span class="card-title">{{$feature->feature_name}}</span>

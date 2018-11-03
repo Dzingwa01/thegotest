@@ -10,7 +10,7 @@
                     <input placeholder="Package Name" id="name" type="text" value="{{$slide->name}}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="description">Slide Description</label>
+                    <label for="description">Slide Description (Months)</label>
                     <textarea class="form-control" id="description" name="description" rows="3">{{$slide->description}}</textarea>
                 </div>
                 <div class="form-group">

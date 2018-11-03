@@ -64,6 +64,18 @@
                             <label for="description">Package Price</label>
                             <input class="form-control" id="package_price" name="package_price" type="number" step="0.01" required>
                         </div>
+                        <div class="form-group">
+                            <label for="duration">Package Duration (Months)</label>
+                            <input class="form-control" id="duration" name="duration" type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="active" value="1" checked>Active
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="active" value="0" >In Active
+                            </label>
+                        </div>
                         <hr/>
                         <h4 class="center">Package Features</h4>
                         <div class="row">

@@ -59,16 +59,15 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         //
-       $features = array_keys($request->except(['package_name','package_description','package_price','_token','q']));
-
+       $features = array_keys($request->except(['package_name','duration','active','package_description','package_price','_token','q']));
+        $input = $request->all();
+        $input['active'] = $input['active']==1?true:false;
         DB::beginTransaction();
         try{
-            $package = Package::create($request->all());
+            $package = Package::create($input);
             foreach ($features as $feature)
             {
-//                dd($feature);
                $pack= Feature::create(['package_id'=>$package->id,'package_feature_id'=>$feature]);
-//                dd($pack);
             }
             DB::commit();
             return redirect('packages')->with(['status'=>"Package ".$package->name. " saved successfully"]);
@@ -90,7 +89,10 @@ class PackageController extends Controller
     {
         //
         $package = Package::where('id',$id)->first();
-        return view('packages.view',compact('package'));
+        $features = Feature::join('package_features','package_features.id','features.package_feature_id')
+                    ->where('package_id',$package->id)
+                    ->get();
+        return view('packages.view',compact('package','features'));
     }
 
     /**
@@ -104,7 +106,9 @@ class PackageController extends Controller
         //
         $packageFeature = PackageFeature::all();
         $package = Package::where('id',$id)->first();
-        return view('packages.edit',compact('package','packageFeature'));
+        $features = Feature::where('package_id',$package->id)->get();
+
+        return view('packages.edit',compact('package','packageFeature','features'));
     }
 
     /**
@@ -117,21 +121,24 @@ class PackageController extends Controller
     public function update(Request $request, Package $package)
     {
         //
-        $features = array_keys($request->except(['package_name','package_description','package_price','_token','q']));
-//
+        $feature_list = array_keys($request->except(['package_name','active','duration','package_description','package_price','_token','q']));
+        $input = $request->all();
+        $input['active'] = $input['active']==1?true:false;
         DB::beginTransaction();
         try{
-            $package->update($request->all());
-            $result = Feature::where('package_id',$package->id)->delete();
-//            dd($result);
-            foreach ($features as $feature)
+            $package->update($input);
+            $deleted_features = Feature::where('package_id',$package->id)->delete();
+//            dd($deleted_features);
+            foreach ($feature_list as $feature)
             {
                 $pack= Feature::create(['package_id'=>$package->id,'package_feature_id'=>$feature]);
             }
             DB::commit();
             return redirect('packages')->with(['status'=>"Package ".$package->name. " updated successfully"]);
         }catch(\Exception $e){
+
             DB::rollback();
+            throw ($e);
             return redirect('packages')->with(['error'=>"Error updating package ".$package->name]);
         }
     }

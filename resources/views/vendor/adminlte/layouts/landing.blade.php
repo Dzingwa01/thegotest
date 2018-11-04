@@ -29,15 +29,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col s3 m3">
+                <div class="col s3 m3">
                     <div class="card">
                         <div class="card-image">
-                            <img style="margin-top:2em;margin:auto;" class="center"
-                                 src="{{URL::asset('/img/transportation.jpg')}}"/>
+                            <img style="margin:auto;" class="center" src="{{URL::asset('/img/specials.png')}}"/>
                             {{--<span class="card-title">Card Title</span>--}}
                         </div>
                     </div>
                 </div>
+
                 <div class="col s3 m3">
                     <div class="card">
                         <div class="card-image">
@@ -59,13 +59,14 @@
 
                     </div>
                 </div>
-                <div class="col s3 m3">
+
+                <div class="col col s3 m3">
                     <div class="card">
                         <div class="card-image">
-                            <img style="margin:auto;" class="center" src="{{URL::asset('/img/specials.png')}}"/>
+                            <img style="margin-top:2em;margin:auto;" class="center"
+                                 src="{{URL::asset('/img/transportation.jpg')}}"/>
                             {{--<span class="card-title">Card Title</span>--}}
                         </div>
-
                     </div>
                 </div>
                 <div class="col s3 m3">

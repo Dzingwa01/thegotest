@@ -18,12 +18,12 @@
 <body>
 <div class="navbar-fixed container-fluid">
     <ul id="dropdown1" class="dropdown-content">
-        <a class="" href="{{ url('/login') }}">Sign In</a><br/>
-        <a class="" href="{{ url('/register') }}">Register</a>
+       <li><a class="" href="{{ url('/login') }}">Sign In</a></li>
+        <li><a class="" href="{{ url('/register') }}">Register</a></li>
     </ul>
     <ul id="dropdown2" class="dropdown-content">
-        <a href="{{ url('/login') }}">Sign In</a><br/>
-        <a href="{{ url('/register') }}">Register</a>
+       <li> <a href="{{ url('/login') }}">Sign In</a></li>
+       <li><a href="{{ url('/register') }}">Register</a></li>
     </ul>
     <nav class="white" role="navigation" style="height: 5em;">
         <div class="nav-wrapper ">

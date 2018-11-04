@@ -26,14 +26,16 @@
 
     </nav>
     <ul id="slide-out" class="sidenav ">
-        <li style="background-color: black;opacity: 0.8;"><div class="user-view">
-                {{--<div class="background">--}}
-                    {{--<img src="{{$template->logo_url}}">--}}
-                {{--</div>--}}
+        <li><div class="user-view">
+                <div class="background">
+                    <img src="img/port_elizabeth.jpg">
+                </div>
                 <a href="#user"><img class="circle" style="height: 160px;width: 160px;" src="{{is_null($template)?"":$template->logo_url}}"></a>
                 <a href="#name"><span class="white-text name">{{Auth::user()->name . " ".Auth::user()->surname}}</span></a>
                 <a href="#email"><span class="white-text email">{{$business->business_email}}</span></a>
             </div></li>
+        <div class="divider"></div>
+
         <ul class="collapsible popout">
             <li>
             <div class="collapsible-header"> <i class="tiny material-icons">home</i><a href="#!" class="" style="color:black;" onclick="dashboard_show()"> Home</a>

@@ -21,26 +21,27 @@
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <a id="logo-container" href="{{url('/')}}" class="brand-logo"><img height="60px" src="{{URL::asset('/img/the_go_logo.png')}}" />  </a>
 
-
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{url('/')}}">Home</a></li>
-                <li><a href="{{url('business_register')}}">Register Business</a></li>
-                <li><a href="#">Favourites</a></li>
-
-                <li><a class="dropdown-trigger_cus" data-target="dropdown2">{{Auth::user()->name . ' '. Auth::user()->surname}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="{{url('/home')}}" style="color:black;font-weight: bolder"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="{{url('business_register')}}" style="color:black;font-weight: bolder"><i class="material-icons left">business_center</i>Register Business</a></li>
+                <li><a href="#" style="color:black;font-weight: bolder"><i class="tiny material-icons left">favorite</i>Favourites</a></li>
+                <li><a class="dropdown-trigger" data-target="dropdown1" style="color:black;font-weight: bolder">{{Auth::user()->name}}<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
 
             <ul id="slide-out" class="sidenav">
                 <li><div class="user-view">
-                        <a href="#user"> <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" /></a>
+                        <div class="background">
+                            <img src="img/port_elizabeth.jpg">
+                        </div>
+                        <a href="#user"> <img src="{{ Gravatar::get($user->email) }}" class="circle" alt="User Image" /></a>
                         <p style="color:black;font-weight: bolder">{{Auth::user()->name . ' '. Auth::user()->surname}}</p>
                         <p style="color:black;font-weight: bolder">{{Auth::user()->email}}</p>
                     </div></li>
-                <hr>
+                <div class="divider"></div>
                 <ul class="collapsible popout" style="margin-top:2em;">
                     <li>
                         <div class="collapsible-header" style="color:black;"><i class="tiny material-icons">home</i><a
-                                    style="color:black;" href="{{url('/')}}">Home</a>
+                                    style="color:black;" href="{{url('/home')}}">Home</a>
                         </div>
                         <div class="collapsible-body">
                         </div>
@@ -93,17 +94,18 @@
         </div>
     </nav>
     <ul id="dropdown1" class="dropdown-content">
-        <a href="{{ url('/logout') }}" class=""
+        <li><a href="#">Profile</a></li>
+        <li><a href="{{ url('/logout') }}" class=""
            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
             Sign Out
-        </a>
+        </a></li>
 
         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
             <input type="submit" value="logout" style="display: none;">
         </form>
-        <li><a href="{{url('register')}}">Register</a></li>
+
 
     </ul>
     <ul id="dropdown2" class="dropdown-content">

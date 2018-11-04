@@ -51,7 +51,18 @@ class HomeController extends Controller
             }else{
                 $business = Business::where('contact_person_id',$user->id)->first();
                 if(is_null($business)){
-                    return view('adminlte::guest_home',compact('user'));
+                    $businesses = \App\Slide::first()->businesses;
+//                    dd($businesses);
+                    $templates = array();
+                    foreach ($businesses as $biz ){
+                        $temp = BusinessTemplate::where('business_id',$biz->id)->first();
+                        if(!is_null($temp)){
+                            $temp->business_name = $biz->business_name;
+                            array_push($templates,$temp);
+                        }
+
+                    }
+                    return view('adminlte::guest_home',compact('user','templates'));
                 }else{
                     $template = BusinessTemplate::where('business_id',$business->id)->first();
                     if(is_null($template)){

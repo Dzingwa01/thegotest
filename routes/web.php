@@ -16,8 +16,11 @@ Route::get('/', function () {
     $templates = array();
     foreach ($businesses as $business ){
         $temp = \App\BusinessTemplate::where('business_id',$business->id)->first();
-        $temp->business_name = $business->business_name;
-        array_push($templates,$temp);
+        if(!is_null($temp)){
+            $temp->business_name = $business->business_name;
+            array_push($templates,$temp);
+        }
+
 
     }
 //    dd($templates);

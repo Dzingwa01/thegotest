@@ -27,17 +27,15 @@
     </ul>
     <nav class="white" role="navigation" style="height: 5em;">
         <div class="nav-wrapper ">
-
             <a id="logo-container" href="{{url('/')}}" class="brand-logo"><img height="60px"
                                                                                src="{{URL::asset('/img/the_go_logo.png')}}"/>
             </a>
             <a href="#" data-target="slide-out" class="sidenav-trigger" style="color:teal"><i class="material-icons">menu</i></a>
 
             <ul class="right hide-on-med-and-down">
-
                 <li><a href="{{url('/')}}"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="{{url('/login')}}">Register Business</a></li>
-                {{--<li><a href="#">Favourites</a></li>--}}
+                <li><a href="{{url('/login')}}"><i class="material-icons left">business_center</i>Register Business</a></li>
+
                 <li>
                     <a style="color:black;font-weight: bolder;" href="!#" class="dropdown-trigger"
                        data-target="dropdown2">
@@ -60,7 +58,7 @@
                 </ul>
                 <ul class="collapsible popout" style="margin-top:1em;">
                     <li>
-                        <div class="collapsible-header" style="color:black;"><i class="tiny material-icons">business</i><a
+                        <div class="collapsible-header" style="color:black;"><i class="tiny material-icons">business_center</i><a
                                     href="{{url('/register')}}">Register Business</a>
                         </div>
                         <div class="collapsible-body">
@@ -162,7 +160,8 @@
         $('.dropdown-trigger').dropdown();
         $('.sidenav').sidenav();
         $('.carousel').carousel({
-            padding: 100
+            padding: 100,
+            numVisible:3
         });
         setInterval(function() {
             $('.carousel').carousel('next');

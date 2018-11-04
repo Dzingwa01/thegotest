@@ -4,8 +4,8 @@
     <div class="container" style="margin-top:1em">
         <div class="carousel">
             @foreach($templates as $template)
-                <a id="{{$template->business_id}}" class="carousel-item" onclick="goToBiz(this)" title="{{$template->business_name . ' - ' . $template->service_description}}" href="{{'#car_'.$template->id.'!'}}"><img
-                            src="{{url($template->logo_url)}}"></a>
+                <a id="{{$template->business_id}}" class="carousel-item tooltipped" onclick="goToBiz(this)" data-position="bottom" data-tooltip="{{$template->business_name . ' - ' . $template->service_description}}" href="{{'#car_'.$template->id.'!'}}">
+                    <img src="{{url($template->logo_url)}}"></a>
             @endforeach
         </div>
     </div>
@@ -62,7 +62,7 @@
                 <div class="col s3 m3">
                     <div class="card">
                         <div class="card-image">
-                            <img style="margin:auto;" class="center" src="{{URL::asset('/img/news.jpg')}}"/>
+                            <img style="margin:auto;" class="center" src="{{URL::asset('/img/specials.png')}}"/>
                             {{--<span class="card-title">Card Title</span>--}}
                         </div>
 
@@ -90,6 +90,17 @@
             </div>
 
         </div>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large" title="Extra Features">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red tooltipped" data-position="left" data-tooltip="Emergency Contact"><i class="material-icons">call</i></a></li>
+            <li><a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Contact Us"><i class="material-icons">email</i></a></li>
+            <li><a class="btn-floating tooltipped" data-position="left" data-tooltip="About us & Privacy Policy"><i class="material-icons">info_outline</i></a></li>
+            <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="Navigator"><i class="material-icons">gps_fixed</i></a></li>
+        </ul>
+    </div>
 
     <style>
         .carousel {
@@ -106,7 +117,8 @@
 
     <script>
         $(document).ready(function () {
-
+            M.AutoInit();
+//            $('.tooltipped').tooltip();
         });
         function goToBiz(obj){
             alert("clicked" +obj.id);

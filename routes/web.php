@@ -12,7 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $businesses = \App\Slide::first()->businesses;
+    $templates = array();
+    foreach ($businesses as $business ){
+        $temp = \App\BusinessTemplate::where('business_id',$business->id)->first();
+        $temp->business_name = $business->business_name;
+        array_push($templates,$temp);
+
+    }
+//    dd($templates);
+    return view('welcome',compact('templates'));
 });
 Route::middleware(['web'])->group(function(){
 

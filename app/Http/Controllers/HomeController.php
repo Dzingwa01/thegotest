@@ -49,9 +49,7 @@ class HomeController extends Controller
             if($user->verified==0){
                 return view('status.status_message_not_activated');
             }else{
-
                 $business = Business::where('contact_person_id',$user->id)->first();
-//                dd($business);
                 if(is_null($business)){
                     return view('adminlte::guest_home',compact('user'));
                 }else{

@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <label for="business_type_id">Business Type</label>
-                            <select id="business_type_id" name="business_type_id">
+                            <select id="business_type_id" class="form-control" name="business_type_id">
                                 @foreach($types as $type)
                                     <option value="{{$type->id}}">{{$type->business_type_name}}</option>
                                     @endforeach
@@ -77,6 +77,15 @@
                         <div class="form-group">
                             <label for="business_address">Business Address</label>
                             <textarea class="form-control" id="business_address" name="business_address" required rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Activate or DeActivate Account</label><br/><hr/>
+                            <label class="radio-inline">
+                                <input type="radio"  name="active" value="1" checked>Active
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="active" value="0" >In Active
+                            </label>
                         </div>
                         <div class="row">
 

@@ -26,12 +26,14 @@ Route::middleware(['web'])->group(function(){
 
         Route::post('add_bussiness_type','UserController@addBussinessType')->name('add_bussiness_type');
         Route::resource('businesses', 'BussinessController');
+        Route::post('businesses/update/{business}','BussinessController@update');
         Route::get('get_businesses','BussinessController@getBusiness')->name('get_businesses');
         Route::get('business_delete/{id}','BussinessController@destroy');
         Route::post('business/update/{package}','BussinessController@update');
 
         Route::post('packages_contracts','BussinessController@packagesContracts')->name('package_contracts');
         Route::get('packages-contracts','BussinessController@navigateToPackages');
+        Route::get('packages-contracts-biz','BussinessController@navigateToPackagesAdmin');
         Route::resource('packages', 'PackageController');
         Route::resource('package_features', 'PackageFeatureController');
 
@@ -60,12 +62,18 @@ Route::middleware(['web'])->group(function(){
 
     Route::get('biz_types_index','UserController@bussinessTypesIndex');
     Route::post('template_selection','UserController@templateSelection');
+    Route::post('template_selection_biz','UserController@templateSelectionBiz');
     Route::get('business-signup-finish','UserController@templatePreview');
+    Route::get('business-signup-finish-biz','UserController@templatePreviewBiz');
+
     Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home_guest', 'HomeController@homeGuest')->name('home_guest');
+
     Route::get('/business_register','HomeController@businessSignUp');
+    Route::get('/admin_business_register','HomeController@businessSignUpAdmin');
+
     Route::get('show','UserController@showUsers')->name('users_info');
     Route::get('users','UserController@getIndex')->name('users');
     Route::post('users','UserController@store')->name('users.store');

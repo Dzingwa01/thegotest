@@ -10,11 +10,14 @@ use App\Feature;
 use App\Jobs\ProcessSignup;
 use App\Package;
 use App\PackageFeature;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendVerificationEmail;
 
 class BussinessController extends Controller
 {
@@ -34,8 +37,8 @@ class BussinessController extends Controller
         $businesses = Business::join('business_types','business_types.id','businesses.business_type_id')->select('businesses.*','business_types.business_type_name')->get();
 //        dd($types);
         return Datatables::of($businesses)->addColumn('action', function ($business) {
-            $re = 'business/' . $business->id;
-            $sh = 'business/' . $business->id.'/edit';
+            $re = 'businesses/' . $business->id;
+            $sh = 'businesses/' . $business->id.'/edit';
             $del = 'business_delete/' . $business->id;
             return '<a class="btn btn-primary" href=' . $re . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-eye-open"></i></a> <a class="btn btn-success" href=' . $sh . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-edit"></i></a><a class="btn btn-danger" href=' . $del . ' style="margin: 0.4em;"><i class="glyphicon glyphicon-trash"></i></a>';
         })
@@ -65,13 +68,33 @@ class BussinessController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        $data['active'] = $data['active']==1?true:false;
+
         DB::beginTransaction();
         try{
-            $business = Business::create($request->all());
+            $user = User::create([
+                'name' => $data['business_name'],
+                'email' => $data['business_email'],
+                'contact_number' => $data['business_contact_number'],
+                'password' => bcrypt($data['password']),
+                'verified'=>0,
+                'verification_token'=>base64_encode($data['business_email']),
+            ]);
+            $data['contact_person_id'] = $user->id;
+            $business = Business::create($data);
+//            dd($business);
+            $role = Role::where('name','business_admin')->first();
+            $user->attachRole($role);
+//            dd($user);
             DB::commit();
+            event($user);
+            dispatch(new SendVerificationEmail($user));
             return redirect('businesses')->with(['status'=>"Business ".$business->name. " saved successfully"]);
         }catch(\Exception $e){
+
             DB::rollback();
+            throw $e;
             return redirect('businesses')->with(['error'=>"Error saving package ".$business->name]);
         }
     }
@@ -158,15 +181,15 @@ class BussinessController extends Controller
     public function showBizPortal(){
 
         $business = Business::where('contact_person_id', Auth::user()->id)->first();
+//        dd($business);
         $package = BusinessPackage::join('packages','packages.id','business_packages.package_id')
                  ->where('business_id',$business->id)->first();
         $package_features = Feature::where('package_id',$package->id)->get();
-//        dd($package_features);
-        $template = BusinessTemplate::where('business_id',$business->id)->first();
 
+        $template = BusinessTemplate::where('business_id',$business->id)->first();
+//        dd($package_features);
         return view('business-portal.portal',compact('business','template','package_features'));
     }
-
 
     public function saveBizPackage($package){
 
@@ -193,15 +216,23 @@ class BussinessController extends Controller
         return view('bussiness.packages_contracts',compact('packages','template'));
     }
 
+    public function navigateToPackagesAdmin(){
+        $packages = Package::all();
+        $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        $template = BusinessTemplate::where('business_id',$business->id)->first();
+        return view('admin-businesses.packages_contracts',compact('packages','template','business'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Business $business)
     {
-        //
+        $types= BusinessType::all();
+        return view('admin-businesses.edit',compact('business','types'));
     }
 
     /**
@@ -211,9 +242,34 @@ class BussinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Business $business)
     {
         //
+
+        $data = $request->input();
+        $data['active'] = $data['active']==1?true:false;
+
+        DB::beginTransaction();
+        try{
+            $user = User::where('email',$business->business_email)->first();
+            $business->update($data);
+           if(empty($data['password'])){
+               $user->update([
+                   'name' => $data['business_name'],
+                   'email' => $data['business_email'],
+                   'contact_number' => $data['business_contact_number'],
+                   'password' => bcrypt($data['password']),
+               ]);
+           }
+
+            DB::commit();
+            return redirect('businesses')->with(['status'=>"Business ".$business->name. " saved successfully"]);
+        }catch(\Exception $e){
+
+            DB::rollback();
+            throw $e;
+            return redirect('businesses')->with(['error'=>"Error saving package ".$business->name]);
+        }
     }
 
     /**

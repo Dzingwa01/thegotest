@@ -2,6 +2,9 @@
 @section('content')
     <div class="container-fluid">
         <div class="row flexbox" style="margin-left: 2em;margin-right: 2em;">
+            @if(count($package_features)==0)
+                <h5>Please complete your business registration by clicking here <a class="btn" href="{{url('admin_business_register')}}">Complete Registration</a> </h5>
+          @else
             @foreach($package_features as $feature)
                 <div class="col s12 m6">
                     <div class="card">
@@ -17,7 +20,7 @@
                                 <p>{{"Service Description: " .$template->service_description}}</p>
                                 <hr/>
                                 <h5>Logo</h5>
-                                <p><img src="{{$template->logo_url}}"/></p>
+                                <p><img style="width: 300px;height: 300px;" src="{{$template->logo_url}}"/></p>
                             @endif
                         </div>
                         <div class="card-action">
@@ -32,7 +35,7 @@
                     </div>
                 </div>
             @endforeach
-
+            @endif
         </div>
     </div>
     <style>

@@ -41,6 +41,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+//        dd($user);
 
         if($user->hasRole('super_admin')){
             return view('adminlte::home');
@@ -48,13 +49,21 @@ class HomeController extends Controller
             if($user->verified==0){
                 return view('status.status_message_not_activated');
             }else{
+
                 $business = Business::where('contact_person_id',$user->id)->first();
+//                dd($business);
                 if(is_null($business)){
                     return view('adminlte::guest_home',compact('user'));
                 }else{
                     $template = BusinessTemplate::where('business_id',$business->id)->first();
                     if(is_null($template)){
-                        return view('adminlte::guest_home',compact('user'));
+                        $business = Business::where('contact_person_id',$user->id)->first();
+                        $template = null;
+                        $package =null;
+                        $package_features = [];
+
+                        return view('business-portal.portal',compact('business','template','package','package_features'));
+
                     }else{
                         $business = Business::where('contact_person_id',$user->id)->first();
                         $template = BusinessTemplate::where('business_id',$business->id)->first();
@@ -80,6 +89,16 @@ class HomeController extends Controller
         $business = Business::where('contact_person_id',$user->id)->first();
         $types =  BusinessType::all();
         return view('bussiness.signup',compact('types','user','business'));
+    }
+
+    public function businessSignUpAdmin(){
+        $user = Auth::user();
+        $business = Business::where('contact_person_id',$user->id)->first();
+        $types =  BusinessType::all();
+        $template = null;
+        $package =null;
+        $package_features = [];
+        return view('admin-businesses.signup',compact('types','user','business','template','package'));
     }
 
     public function homeGuest()

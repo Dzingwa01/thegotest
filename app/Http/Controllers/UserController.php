@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\BusinessTemplate;
 use App\BusinessType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,9 +50,27 @@ class UserController extends Controller
             }else{
                 $business->update($request->all());
             }
-
             DB::commit();
             return view('bussiness.template_selection', compact('business'));
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
+    public function templateSelectionBiz(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $business = Business::where('contact_person_id', Auth::user()->id)->first();
+            if (is_null($business)) {
+                $business = Business::create($request->all());
+            }else{
+                $business->update($request->all());
+            }
+
+            DB::commit();
+            $template = null;
+            return view('admin-businesses.template_selection', compact('business','template'));
 
         } catch (\Exception $e) {
             dd($e);
@@ -63,7 +82,12 @@ class UserController extends Controller
         $business = Business::where('contact_person_id', Auth::user()->id)->first();
         return view('bussiness.template_preview',compact('business'));
     }
-
+    public function templatePreviewBiz()
+    {
+        $business = Business::where('contact_person_id', Auth::user()->id)->first();
+        $template = BusinessTemplate::where('business_id',$business->id)->first();
+        return view('admin-businesses.template_preview',compact('business','template'));
+    }
     function showBusinessTypes()
     {
 

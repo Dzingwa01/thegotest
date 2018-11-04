@@ -180,15 +180,13 @@ class BussinessController extends Controller
 
     public function showBizPortal(){
 
-        $business = Business::where('contact_person_id', Auth::user()->id)->first();
-//        dd($business);
-        $package = BusinessPackage::join('packages','packages.id','business_packages.package_id')
-                 ->where('business_id',$business->id)->first();
-        $package_features = Feature::where('package_id',$package->id)->get();
-
+        $business = Business::where('contact_person_id',Auth::user()->id)->first();
         $template = BusinessTemplate::where('business_id',$business->id)->first();
-//        dd($package_features);
-        return view('business-portal.portal',compact('business','template','package_features'));
+        $package = BusinessPackage::join('packages','packages.id','business_packages.package_id')
+            ->where('business_id',$business->id)->first();
+        $package_features = Feature::join('package_features','package_features.id','features.package_feature_id')->where('package_id',$package->id)
+            ->get();
+        return view('business-portal.portal',compact('business','template','package','package_features'));
     }
 
     public function saveBizPackage($package){
@@ -210,7 +208,7 @@ class BussinessController extends Controller
     }
 
     public function navigateToPackages(){
-        $packages = Package::all();
+        $packages = Package::where('active',1)->get();
         $business = Business::where('contact_person_id', Auth::user()->id)->first();
         $template = BusinessTemplate::where('business_id',$business->id)->first();
         return view('bussiness.packages_contracts',compact('packages','template'));
